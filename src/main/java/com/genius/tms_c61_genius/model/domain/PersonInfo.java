@@ -1,15 +1,18 @@
 package com.genius.tms_c61_genius.model.domain;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.stereotype.Component;
+
+import java.sql.Date;
 
 @Data
 @Component
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(exclude={"artist"})
+@ToString(exclude = {"artist"})
+@Builder
 @Entity
 @Table(name = "person_info")
 public class PersonInfo {
@@ -17,7 +20,7 @@ public class PersonInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "peron_infos_seq")
     @SequenceGenerator(name = "peron_infos_seq", sequenceName = "person_info_id_seq", allocationSize = 1)
-    private long id;
+    private Integer id;
 
     @Column(name = "first_name")
     private String firstName;
@@ -30,7 +33,10 @@ public class PersonInfo {
     @Column(name = "bio")
     private String bio;
     @Column(name = "birth_date")
-    private String birthDate;
+    private Date birthDate;
     @Column(name = "country")
     private String country;
+    @OneToOne(mappedBy = "personInfo")
+    private Artist artist;
+
 }

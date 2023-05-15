@@ -16,7 +16,7 @@ public class Genre {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "genres_seq")
     @SequenceGenerator(name = "genres_seq", sequenceName = "genre_id_seq", allocationSize = 1)
-    private long id;
+    private Integer id;
 
     @Column(name = "genre_title")
     private String genreTitle;

@@ -1,11 +1,11 @@
 package com.genius.tms_c61_genius.model.domain;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.stereotype.Component;
 @Data
+@EqualsAndHashCode(exclude={"song","user"})
+@ToString(exclude = {"song","user"})
 @Component
 @NoArgsConstructor
 @AllArgsConstructor
@@ -16,7 +16,7 @@ public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "comments_seq")
     @SequenceGenerator(name = "comments_seq", sequenceName = "comment_id_seq", allocationSize = 1)
-    private long id;
+    private Integer id;
 
     @Column(name = "comment_content")
     private String content;

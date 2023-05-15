@@ -17,7 +17,7 @@ public class Label {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "labels_seq")
     @SequenceGenerator(name = "labels_seq", sequenceName = "label_id_seq", allocationSize = 1)
-    private long id;
+    private Integer id;
 
     @Column(name = "label_name")
     private String labelName;
