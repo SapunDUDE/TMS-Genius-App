@@ -23,7 +23,6 @@ public class ArtistDtoMapper {
     }
 
     public Artist artistReqToArtist(ArtistReqDto artistReqDto){
-        //TODO убрать if и словить ошибку
         return(Artist.builder().
                 user((userRepository.getUserByLogin(artistReqDto.getUserLogin()).isPresent())?
                         userRepository.getUserByLogin(artistReqDto.getUserLogin()).get():null)

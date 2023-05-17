@@ -12,6 +12,7 @@ import java.util.List;
 @Component
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "sound_producer")
 public class SoundProducer {
@@ -20,11 +21,11 @@ public class SoundProducer {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "producers_seq")
     @SequenceGenerator(name = "producers_seq", sequenceName = "sound_producer_id_seq", allocationSize = 1)
     private Integer id;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "person_info_id", referencedColumnName = "id")
     private PersonInfo personInfo;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,CascadeType.MERGE,CascadeType.DETACH,CascadeType.PERSIST})
     @JoinTable(name = "l_sound_producer_album", joinColumns = @JoinColumn(name = "sound_producer_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "album_id", referencedColumnName = "id"))
     private List<Album> albums;
