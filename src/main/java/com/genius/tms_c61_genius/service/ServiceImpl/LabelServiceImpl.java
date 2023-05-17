@@ -21,6 +21,7 @@ public class LabelServiceImpl implements LabelService {
 
     @Override
     public LabelResDto createLabel(LabelReqDto labelReqDto) {
+        System.out.println(labelReqDto);
         Label savedLabel = labelRepository.save(labelDtoMapper.labelReqToLabel(labelReqDto));
         return labelDtoMapper.labelToLabelRes(savedLabel);
     }

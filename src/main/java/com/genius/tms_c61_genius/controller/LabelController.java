@@ -17,12 +17,13 @@ public class LabelController {
     }
 
     @PostMapping("/admin/label")
-    ResponseEntity<LabelResDto>createLabel(LabelReqDto labelReqDto){
+    ResponseEntity<LabelResDto>createLabel(@RequestBody LabelReqDto labelReqDto){
+        System.out.println(labelReqDto);
         return new ResponseEntity<>(labelService.createLabel(labelReqDto), HttpStatus.CREATED);
     }
 
     @PutMapping("/admin/label")
-    ResponseEntity<LabelResDto>updateLabelInfo(LabelReqDto labelReqDto){
+    ResponseEntity<LabelResDto>updateLabelInfo(@RequestBody LabelReqDto labelReqDto){
         return new ResponseEntity<>(labelService.updateLabelInfo(labelReqDto),HttpStatus.OK);
     }
 
@@ -32,9 +33,8 @@ public class LabelController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @GetMapping("/label{name}")
+    @GetMapping("/label/{name}")
     ResponseEntity<LabelResDto>getLabel(@PathVariable String name){
         return  new ResponseEntity<>(labelService.getLabelInfo(name),HttpStatus.OK);
     }
-
 }

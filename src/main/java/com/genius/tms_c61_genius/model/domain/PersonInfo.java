@@ -38,5 +38,4 @@ public class PersonInfo {
     private String country;
     @OneToOne(mappedBy = "personInfo")
     private Artist artist;
-
 }

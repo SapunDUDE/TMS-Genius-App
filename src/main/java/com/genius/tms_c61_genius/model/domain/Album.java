@@ -13,6 +13,7 @@ import java.util.List;
 @Component
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "album")
 public class Album {

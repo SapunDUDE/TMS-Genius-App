@@ -26,7 +26,7 @@ public class Song {
     private String text;
     @Column(name = "duration")
     private int duration;
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "album_id", referencedColumnName = "id")
     private Album album;
     @ManyToMany(mappedBy = "songs")

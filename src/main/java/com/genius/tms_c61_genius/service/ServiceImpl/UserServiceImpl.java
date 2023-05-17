@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserServiceImpl implements UserService {
-    //TODO: add password encoder and custom exceptions
+    //TODO add password encoder and custom exceptions
     //private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
     private final UserDtoMapper userDtoMapper;

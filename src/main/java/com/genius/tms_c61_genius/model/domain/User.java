@@ -24,9 +24,9 @@ public class User {
     private String password;
     @Column(name = "nickname")
     private String nickName;
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,CascadeType.MERGE,CascadeType.DETACH,CascadeType.PERSIST})
     @JoinColumn(name = "role_id", referencedColumnName = "id")
     private Role role;
-   /* @OneToOne(mappedBy = "user")
-    private Artist artist;*/
+    @OneToOne(mappedBy = "user")
+    private Artist artist;
 }

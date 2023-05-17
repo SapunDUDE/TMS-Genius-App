@@ -1,7 +1,6 @@
 package com.genius.tms_c61_genius.controller;
 
 import com.genius.tms_c61_genius.model.request.ArtistReqDto;
-import com.genius.tms_c61_genius.model.request.DeleteArtistReqDto;
 import com.genius.tms_c61_genius.model.request.UpdateArtistReqDto;
 import com.genius.tms_c61_genius.model.response.ArtistResDto;
 import com.genius.tms_c61_genius.service.ArtistService;
@@ -27,8 +26,8 @@ public class ArtistController {
     public ResponseEntity<ArtistResDto> updateArtist(@RequestBody UpdateArtistReqDto updateArtistReqDto){
         return new ResponseEntity<>(artistService.updateArtist(updateArtistReqDto),HttpStatus.OK);
     }
-    @DeleteMapping("/artist/{userlogin}")
-    public ResponseEntity<HttpStatus> deleteArtistByUserLogin(@PathVariable String userlogin){
+    @DeleteMapping("/artist")
+    public ResponseEntity<HttpStatus> deleteArtistByUserLogin(@RequestParam String userlogin){
         artistService.deleteArtistByUser(userlogin);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
@@ -39,13 +38,13 @@ public class ArtistController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    /*@GetMapping("/artist{nickname}")
+    @GetMapping("/artist/{nickname}")
     public ResponseEntity<ArtistResDto>getArtistByNickName(@PathVariable String nickname){
         return new ResponseEntity<>(artistService.getArtistByNickName(nickname),HttpStatus.OK);
-    }*/
+    }
 
-    @GetMapping("/artist/{userlogin}")
-    public ResponseEntity<ArtistResDto>getArtistByUser(@PathVariable String userlogin){
+    @GetMapping("/artist")
+    public ResponseEntity<ArtistResDto>getArtistByUser(@RequestParam String userlogin){
         return new ResponseEntity<>(artistService.getArtistByUser(userlogin),HttpStatus.OK);
     }
 }

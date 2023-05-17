@@ -47,11 +47,13 @@ public class ArtistServiceImpl implements ArtistService {
     }
 
     @Override
+    @Transactional
     public void deleteArtistByUser(String userLogin) {
         artistRepository.deleteArtistByUser_Login(userLogin);
     }
 
     @Override
+    @Transactional
     public void deleteArtistByNickName(String nickName) {
         artistRepository.deleteArtistByPersonInfoNickname(nickName);
     }

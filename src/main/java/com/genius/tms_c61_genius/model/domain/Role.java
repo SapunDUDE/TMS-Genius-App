@@ -10,6 +10,7 @@ import java.util.Set;
 @Component
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @EqualsAndHashCode(exclude="users")
 @ToString(exclude = "users")
 @Entity
