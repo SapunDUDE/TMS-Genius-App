@@ -26,4 +26,9 @@ public class UserController {
         userService.deleteUser(login);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    @GetMapping("/user/{login}")
+    public ResponseEntity<UserResDto> getUser(@PathVariable String login){
+        return new ResponseEntity<>(userService.getUser(login),HttpStatus.OK);
+    }
 }

@@ -27,6 +27,6 @@ public class User {
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
     @JoinColumn(name = "role_id", referencedColumnName = "id")
     private Role role;
-    @OneToOne(mappedBy = "user")
-    private Artist artist;
+   /* @OneToOne(mappedBy = "user")
+    private Artist artist;*/
 }

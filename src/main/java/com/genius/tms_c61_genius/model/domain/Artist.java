@@ -22,7 +22,7 @@ public class Artist {
     private Integer id;
     @Column(name = "img")
     private String img;
-    @OneToOne(cascade = CascadeType.ALL/*{CascadeType.REFRESH,CascadeType.MERGE,CascadeType.DETACH}*/)
+    @OneToOne(cascade = {CascadeType.REFRESH,CascadeType.MERGE,CascadeType.DETACH,CascadeType.PERSIST})
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
     @OneToOne(cascade = CascadeType.ALL)

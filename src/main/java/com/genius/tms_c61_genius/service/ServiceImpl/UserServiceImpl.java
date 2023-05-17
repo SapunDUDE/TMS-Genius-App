@@ -34,4 +34,9 @@ public class UserServiceImpl implements UserService {
                 userRepository.getUserByLogin(login).get()
         );
     }
+
+    @Override
+    public UserResDto getUser(String login) {
+        return userDtoMapper.userToUserRes(userRepository.getUserByLogin(login).get());
+    }
 }
