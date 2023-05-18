@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface LabelRepository extends JpaRepository<Label,Integer> {
     Label getLabelByLabelName(String labelName);
+    Boolean existsLabelById(Integer id);
+    Boolean existsLabelByLabelName(String labelName);
 }

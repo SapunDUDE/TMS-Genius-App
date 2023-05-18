@@ -1,5 +1,7 @@
 package com.genius.tms_c61_genius.service.ServiceImpl;
 
+import com.genius.tms_c61_genius.exception.BadDataException;
+import com.genius.tms_c61_genius.exception.NotFoundException;
 import com.genius.tms_c61_genius.mapper.CommentDtoMapper;
 import com.genius.tms_c61_genius.model.request.CommentReqDto;
 import com.genius.tms_c61_genius.model.response.CommentResDto;
@@ -25,6 +27,9 @@ public class CommentServiceImpl implements CommentService {
     @Override
     @Transactional
     public CommentResDto createComment(CommentReqDto commentReqDto) {
+        if(commentRepository.existsCommentsBySongId(commentReqDto.getSongId()) ||
+        commentRepository.existsCommentsByUserId(commentReqDto.getUserId()))
+            throw new BadDataException("comment with such user id or song id is already exist");
         Comment newComment = commentDtoMapper.commentReqToComment(commentReqDto);
         commentRepository.save(newComment);
         return commentDtoMapper.commentToCommentRes(newComment);
@@ -32,6 +37,8 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public CommentResDto editComment(CommentReqDto commentReqDto, Integer id) {
+        if(!commentRepository.existsCommentById(id))
+            throw new NotFoundException("comment not found");
         Comment oldComment = commentRepository.getCommentById(id).get();
         oldComment = commentRepository.save(commentDtoMapper.editComment(oldComment,commentReqDto));
         return commentDtoMapper.commentToCommentRes(oldComment);
@@ -40,6 +47,8 @@ public class CommentServiceImpl implements CommentService {
     @Override
     @Transactional
     public void deleteCommentById(Integer commentId) {
+        if(!commentRepository.existsCommentById(commentId))
+            throw new NotFoundException("comment not found");
         commentRepository.delete(commentRepository.getCommentById(commentId).get());
     }
 }

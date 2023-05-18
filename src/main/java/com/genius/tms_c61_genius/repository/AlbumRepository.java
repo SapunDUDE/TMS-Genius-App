@@ -11,5 +11,6 @@ import java.util.List;
 public interface AlbumRepository extends JpaRepository<Album,Integer> {
     Album getAlbumByAlbumTitle(String albumTitle);
     List<Album> findAlbumsByArtists(Artist artist);
+    Boolean existsAlbumByAlbumTitle(String albumTitle);
 
 }

@@ -15,4 +15,6 @@ public interface SongRepository extends JpaRepository<Song,Integer> {
     List<Song>getSongsByArtists(Artist artist);
 
     Optional<Song> getSongsById(Integer id);
+    Boolean existsSongById(Integer id);
+
 }

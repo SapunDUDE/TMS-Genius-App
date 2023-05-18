@@ -5,6 +5,7 @@ import com.genius.tms_c61_genius.model.response.CommentResDto;
 import com.genius.tms_c61_genius.model.response.UserResDto;
 import com.genius.tms_c61_genius.service.CommentService;
 import com.genius.tms_c61_genius.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +24,7 @@ public class UserController {
     }
 
     @PostMapping("/admin/user")
-    public ResponseEntity<UserResDto> createUser(@RequestBody UserReqDto user) {
+    public ResponseEntity<UserResDto> createUser(@Valid @RequestBody UserReqDto user) {
         return new ResponseEntity<>(userService.createUser(user), HttpStatus.CREATED);
     }
 

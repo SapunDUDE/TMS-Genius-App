@@ -16,4 +16,8 @@ public interface ArtistRepository extends JpaRepository<Artist,Integer> {
 
     void deleteArtistByPersonInfoNickname(String nickname);
     List<Artist> getArtistByAlbums(Album album);
+
+    Boolean existsArtistsByAlbumsId(Integer id);
+    Boolean existsArtistByUserLogin(String login);
+    Boolean existsArtistByPersonInfoNickname(String nickName);
 }

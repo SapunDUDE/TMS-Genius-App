@@ -1,5 +1,7 @@
 package com.genius.tms_c61_genius.service.ServiceImpl;
 
+import com.genius.tms_c61_genius.exception.BadDataException;
+import com.genius.tms_c61_genius.exception.NotFoundException;
 import com.genius.tms_c61_genius.mapper.ArtistDtoMapper;
 import com.genius.tms_c61_genius.mapper.SongDtoMapper;
 import com.genius.tms_c61_genius.model.domain.Artist;
@@ -44,6 +46,8 @@ public class ArtistServiceImpl implements ArtistService {
     @Override
     @Transactional
     public ArtistResDto createArtist(ArtistReqDto artistReqDto) {
+        if(artistRepository.existsArtistByPersonInfoNickname(artistReqDto.getNickname()))
+            throw new BadDataException("artist with such nickname is already exist");
         Artist savedArtist =  artistDtoMapper.artistReqToArtist(artistReqDto);
         artistRepository.save(savedArtist);
         return artistDtoMapper.artistToArtistRes(savedArtist);
@@ -51,29 +55,39 @@ public class ArtistServiceImpl implements ArtistService {
 
     @Override
     public ArtistResDto getArtistByUser(String userLogin) {
+        if(!artistRepository.existsArtistByUserLogin(userLogin))
+            throw new NotFoundException("artist not found");
         return artistDtoMapper.artistToArtistRes(artistRepository.getArtistByUser_Login(userLogin));
     }
 
     @Override
     public ArtistResDto getArtistByNickName(String nickName) {
+        if(!artistRepository.existsArtistByPersonInfoNickname(nickName))
+            throw new NotFoundException("artist not found");
         return artistDtoMapper.artistToArtistRes(artistRepository.getArtistByPersonInfoNickname(nickName).get());
     }
 
     @Override
     @Transactional
     public void deleteArtistByUser(String userLogin) {
+        if(!artistRepository.existsArtistByUserLogin(userLogin))
+            throw new NotFoundException("artist not found");
         artistRepository.deleteArtistByUser_Login(userLogin);
     }
 
     @Override
     @Transactional
     public void deleteArtistByNickName(String nickName) {
+        if(!artistRepository.existsArtistByPersonInfoNickname(nickName))
+            throw new NotFoundException("artist not found");
         artistRepository.deleteArtistByPersonInfoNickname(nickName);
     }
 
     @Override
     @Transactional
     public ArtistResDto updateArtist(UpdateArtistReqDto updateArtistReqDto) {
+        if(artistRepository.existsArtistByPersonInfoNickname(updateArtistReqDto.getNickname()))
+            throw new BadDataException("artist with such nickname is already exist");
          Artist artistToUpdate = artistRepository.getArtistByPersonInfoNickname(updateArtistReqDto.getNickname()).get();
          artistDtoMapper.updateArtistInfo(artistToUpdate,updateArtistReqDto);
          artistRepository.save(artistToUpdate);
@@ -82,6 +96,8 @@ public class ArtistServiceImpl implements ArtistService {
 
     @Override
     public List<SongResDto> getSongs(String nickName) {
+        if(!artistRepository.existsArtistByPersonInfoNickname(nickName))
+            throw new NotFoundException("artist not found");
         return songRepository.getSongsByArtists(artistRepository.getArtistByPersonInfoNickname(nickName).get())
                 .stream()
                 .map(song-> songDtoMapper.songToSongRes(song))
@@ -90,6 +106,8 @@ public class ArtistServiceImpl implements ArtistService {
 
     @Override
     public List<String> getAlbums(String nickName) {
+        if(!artistRepository.existsArtistByPersonInfoNickname(nickName))
+            throw new NotFoundException("artist not found");
        return albumRepository.findAlbumsByArtists(artistRepository.getArtistByPersonInfoNickname(nickName).get())
                .stream()
                .map(album->album.getAlbumTitle())

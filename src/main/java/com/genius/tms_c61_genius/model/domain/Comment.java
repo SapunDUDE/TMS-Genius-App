@@ -30,6 +30,6 @@ public class Comment {
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,CascadeType.MERGE,CascadeType.DETACH,CascadeType.PERSIST})
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
-    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,CascadeType.MERGE,CascadeType.DETACH,CascadeType.PERSIST})
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Song song;
 }

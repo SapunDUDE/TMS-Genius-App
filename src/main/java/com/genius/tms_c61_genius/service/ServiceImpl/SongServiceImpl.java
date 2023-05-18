@@ -1,5 +1,6 @@
 package com.genius.tms_c61_genius.service.ServiceImpl;
 
+import com.genius.tms_c61_genius.exception.NotFoundException;
 import com.genius.tms_c61_genius.mapper.CommentDtoMapper;
 import com.genius.tms_c61_genius.model.request.CommentReqDto;
 import com.genius.tms_c61_genius.model.response.CommentResDto;
@@ -27,7 +28,10 @@ public class SongServiceImpl implements SongService {
 
     @Override
     public List<CommentResDto> getComments(Integer id) {
-        return commentRepository.getCommentsBySongId(songRepository.getSongsById(id).get().getId())
+        if(!songRepository.existsSongById(id)){
+            throw new NotFoundException("song not found");
+        }
+        return commentRepository.getCommentsBySongId(id)
                 .stream()
                 .map(comment -> commentDtoMapper.commentToCommentRes(comment))
                 .toList();

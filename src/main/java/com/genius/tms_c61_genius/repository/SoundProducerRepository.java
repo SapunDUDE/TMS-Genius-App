@@ -17,4 +17,7 @@ public interface SoundProducerRepository extends JpaRepository<SoundProducer,Int
 
     void deleteSoundProducerById(Integer id);
     void deleteSoundProducerByPersonInfoNickname(String nickname);
+
+    Boolean existsSoundProducerByPersonInfoNickname(String nickName);
+    Boolean existsSoundProducerById(Integer id);
 }

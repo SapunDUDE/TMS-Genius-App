@@ -9,5 +9,7 @@ public interface AlbumTypeRepository extends JpaRepository<AlbumType,Integer> {
     AlbumType findAlbumTypeByTypeName(String typeName);
     AlbumType getAlbumTypeById(Integer id);
     void deleteById(Integer id);
+    Boolean existsAlbumTypeById(Integer id);
+    Boolean existsAlbumTypeByTypeName(String typeName);
 
 }

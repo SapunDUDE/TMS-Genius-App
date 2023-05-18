@@ -1,5 +1,7 @@
 package com.genius.tms_c61_genius.service.ServiceImpl;
 
+import com.genius.tms_c61_genius.exception.BadDataException;
+import com.genius.tms_c61_genius.exception.NotFoundException;
 import com.genius.tms_c61_genius.mapper.CommentDtoMapper;
 import com.genius.tms_c61_genius.mapper.UserDtoMapper;
 import com.genius.tms_c61_genius.model.domain.User;
@@ -36,25 +38,31 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserResDto createUser(UserReqDto userReq) {
+        if(userRepository.existsUserByLogin(userReq.getLogin()))
+            throw new BadDataException("user with such login is already exist");
         User savedUser = userRepository.save(userDtoMapper.userReqToUser(userReq));
         return userDtoMapper.userToUserRes(savedUser);
     }
 
     @Override
     public void deleteUser(String login) {
-         userRepository.delete(
-                userRepository.getUserByLogin(login).get()
-        );
+        if(!userRepository.existsUserByLogin(login))
+            throw new NotFoundException("user not found");
+        userRepository.delete(userRepository.getUserByLogin(login).get());
     }
 
     @Override
     public UserResDto getUser(String login) {
+        if(!userRepository.existsUserByLogin(login))
+            throw new NotFoundException("user not found");
         return userDtoMapper.userToUserRes(userRepository.getUserByLogin(login).get());
     }
 
     @Override
     public List<CommentResDto> getComments(Integer id) {
-        return commentRepository.getCommentsByUserId(userRepository.getUserById(id).get().getId())
+        if(!userRepository.existsUserById(id))
+            throw new NotFoundException("user not found");
+        return commentRepository.getCommentsByUserId(id)
                 .stream()
                 .map(comment -> commentDtoMapper.commentToCommentRes(comment))
                 .toList();
