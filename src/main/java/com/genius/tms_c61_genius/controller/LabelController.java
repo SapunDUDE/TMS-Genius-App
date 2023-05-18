@@ -1,5 +1,6 @@
 package com.genius.tms_c61_genius.controller;
 
+import com.genius.tms_c61_genius.aspect.TrackExecutionTime;
 import com.genius.tms_c61_genius.model.request.LabelReqDto;
 import com.genius.tms_c61_genius.model.response.LabelResDto;
 import com.genius.tms_c61_genius.service.LabelService;
@@ -17,17 +18,20 @@ public class LabelController {
     }
 
     @PostMapping("/admin/label")
+    @TrackExecutionTime
     ResponseEntity<LabelResDto>createLabel(@RequestBody LabelReqDto labelReqDto){
         System.out.println(labelReqDto);
         return new ResponseEntity<>(labelService.createLabel(labelReqDto), HttpStatus.CREATED);
     }
 
     @PutMapping("/admin/label")
+    @TrackExecutionTime
     ResponseEntity<LabelResDto>updateLabelInfo(@RequestBody LabelReqDto labelReqDto){
         return new ResponseEntity<>(labelService.updateLabelInfo(labelReqDto),HttpStatus.OK);
     }
 
     @DeleteMapping("/admin/label/{name}")
+    @TrackExecutionTime
     ResponseEntity<HttpStatus>deleteLabel(@PathVariable String name){
         labelService.deleteLabel(name);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

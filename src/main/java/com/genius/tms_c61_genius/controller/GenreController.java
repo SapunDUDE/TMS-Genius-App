@@ -1,5 +1,6 @@
 package com.genius.tms_c61_genius.controller;
 
+import com.genius.tms_c61_genius.aspect.TrackExecutionTime;
 import com.genius.tms_c61_genius.service.GenreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,16 +21,19 @@ public class GenreController {
     }
 
     @PostMapping("/admin/genre")
+    @TrackExecutionTime
     ResponseEntity<String>createGenre(@RequestParam String genrename){
         return new ResponseEntity<>(genreService.createGenre(genrename),HttpStatus.CREATED);
     }
 
     @PutMapping("/admin/genre")
+    @TrackExecutionTime
     ResponseEntity<String>updateGenre(@RequestParam Integer genreid, @RequestParam String genrename){
         return new ResponseEntity<>(genreService.updateGenre(genreid,genrename),HttpStatus.OK);
     }
 
     @DeleteMapping("/admin/genre")
+    @TrackExecutionTime
     ResponseEntity<HttpStatus>deleteGenre(@RequestParam Integer genreid){
         genreService.deleteGenre(genreid);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

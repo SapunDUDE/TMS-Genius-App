@@ -27,9 +27,6 @@ public class CommentServiceImpl implements CommentService {
     @Override
     @Transactional
     public CommentResDto createComment(CommentReqDto commentReqDto) {
-        if(commentRepository.existsCommentsBySongId(commentReqDto.getSongId()) ||
-        commentRepository.existsCommentsByUserId(commentReqDto.getUserId()))
-            throw new BadDataException("comment with such user id or song id is already exist");
         Comment newComment = commentDtoMapper.commentReqToComment(commentReqDto);
         commentRepository.save(newComment);
         return commentDtoMapper.commentToCommentRes(newComment);

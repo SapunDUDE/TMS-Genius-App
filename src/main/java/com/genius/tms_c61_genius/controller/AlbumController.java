@@ -1,5 +1,6 @@
 package com.genius.tms_c61_genius.controller;
 
+import com.genius.tms_c61_genius.aspect.TrackExecutionTime;
 import com.genius.tms_c61_genius.model.request.AlbumReqDto;
 import com.genius.tms_c61_genius.model.response.AlbumResDto;
 import com.genius.tms_c61_genius.model.response.SongResDto;
@@ -21,11 +22,13 @@ public class AlbumController {
     }
 
     @PostMapping("/album/create")
+    @TrackExecutionTime
     ResponseEntity<AlbumResDto>createAlbum(@RequestBody AlbumReqDto albumReqDto){
         return new ResponseEntity<>(albumService.createAlbum(albumReqDto), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/album/delete")
+    @TrackExecutionTime
     ResponseEntity<HttpStatus>deleteAlbum(@RequestParam String title){
         albumService.deleteAlbum(title);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

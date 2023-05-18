@@ -49,8 +49,10 @@ public class AlbumServiceImpl implements AlbumService {
 
     @Override
     public List<SongResDto> getSongs(String albumTitle) {
-        if(!albumRepository.existsAlbumByAlbumTitle(albumTitle))
+        if(!albumRepository.existsAlbumByAlbumTitle(albumTitle)){
             throw new BadDataException("album not found");
+        }
+
         return songRepository.getSongsByAlbum_AlbumTitle(albumTitle)
                 .stream().map(song-> songDtoMapper.songToSongRes(song))
                 .toList();
@@ -94,6 +96,7 @@ public class AlbumServiceImpl implements AlbumService {
         }
         songRepository.deleteSongsByAlbumAlbumTitle(albumTitle);
         albumRepository.delete(albumRepository.getAlbumByAlbumTitle(albumTitle));
+
     }
 
     @Override

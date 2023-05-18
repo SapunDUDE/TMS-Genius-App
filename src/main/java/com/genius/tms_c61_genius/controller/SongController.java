@@ -1,5 +1,6 @@
 package com.genius.tms_c61_genius.controller;
 
+import com.genius.tms_c61_genius.aspect.TrackExecutionTime;
 import com.genius.tms_c61_genius.model.request.CommentReqDto;
 import com.genius.tms_c61_genius.model.response.CommentResDto;
 import com.genius.tms_c61_genius.service.CommentService;
@@ -21,19 +22,23 @@ public class SongController {
         this.songService = songService;
     }
     @PostMapping("/song/comment/add")
+    @TrackExecutionTime
     ResponseEntity<CommentResDto>createComment(@RequestBody CommentReqDto commentReqDto){
         return new ResponseEntity<>(commentService.createComment(commentReqDto), HttpStatus.CREATED);
     }
     @PutMapping("/song/comment/edit")
+    @TrackExecutionTime
     ResponseEntity<CommentResDto>editComment(@RequestBody CommentReqDto commentReqDto, @RequestParam Integer id){
         return new ResponseEntity<>(commentService.editComment(commentReqDto,id), HttpStatus.OK);
     }
     @DeleteMapping("/song/comment/delete")
+    @TrackExecutionTime
     ResponseEntity<HttpStatus>deleteComment(@RequestParam Integer id){
         commentService.deleteCommentById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
     @GetMapping("/song/comments")
+    @TrackExecutionTime
     ResponseEntity<List<CommentResDto>>getSongComments(@RequestParam Integer id){
         return new ResponseEntity<>(songService.getComments(id),HttpStatus.OK);
     }

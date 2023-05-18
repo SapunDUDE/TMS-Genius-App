@@ -1,5 +1,6 @@
 package com.genius.tms_c61_genius.controller;
 
+import com.genius.tms_c61_genius.aspect.TrackExecutionTime;
 import com.genius.tms_c61_genius.service.AlbumTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,16 +21,19 @@ public class AlbumTypeController {
     }
 
     @PostMapping("/admin/albumtype")
+    @TrackExecutionTime
     ResponseEntity<String>createAlbumType(@RequestParam String typename){
         return new ResponseEntity<>(albumTypeService.createAlbumType(typename),HttpStatus.CREATED);
     }
 
     @PutMapping("/admin/albumtype")
+    @TrackExecutionTime
     ResponseEntity<String>updateAlbumType(@RequestParam Integer typeid, @RequestParam String typename){
         return new ResponseEntity<>(albumTypeService.updateAlbumType(typeid,typename),HttpStatus.OK);
     }
 
     @DeleteMapping("/admin/albumtype")
+    @TrackExecutionTime
     ResponseEntity<HttpStatus>deleteAlbumType(@RequestParam Integer typeid){
         albumTypeService.deleteAlbumType(typeid);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

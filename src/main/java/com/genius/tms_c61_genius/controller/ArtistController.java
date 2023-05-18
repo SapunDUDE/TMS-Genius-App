@@ -1,5 +1,6 @@
 package com.genius.tms_c61_genius.controller;
 
+import com.genius.tms_c61_genius.aspect.TrackExecutionTime;
 import com.genius.tms_c61_genius.model.request.ArtistReqDto;
 import com.genius.tms_c61_genius.model.request.UpdateArtistReqDto;
 import com.genius.tms_c61_genius.model.response.ArtistResDto;
@@ -20,21 +21,25 @@ public class ArtistController {
     }
 
     @PostMapping("/admin/artist")
+    @TrackExecutionTime
     public ResponseEntity<ArtistResDto> createArtist(@RequestBody ArtistReqDto artistReqDto){
         return new ResponseEntity<>(artistService.createArtist(artistReqDto), HttpStatus.CREATED);
     }
 
     @PutMapping("/artist")
+    @TrackExecutionTime
     public ResponseEntity<ArtistResDto> updateArtist(@RequestBody UpdateArtistReqDto updateArtistReqDto){
         return new ResponseEntity<>(artistService.updateArtist(updateArtistReqDto),HttpStatus.OK);
     }
     @DeleteMapping("/artist")
+    @TrackExecutionTime
     public ResponseEntity<HttpStatus> deleteArtistByUserLogin(@RequestParam String userlogin){
         artistService.deleteArtistByUser(userlogin);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @DeleteMapping("/artist/{nickname}")
+    @TrackExecutionTime
     public ResponseEntity<HttpStatus> deleteArtistByNickName(@PathVariable String nickname){
         artistService.deleteArtistByNickName(nickname);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

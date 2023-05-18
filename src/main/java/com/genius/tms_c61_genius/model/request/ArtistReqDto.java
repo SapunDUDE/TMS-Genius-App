@@ -36,9 +36,7 @@ public class ArtistReqDto {
     @NotEmpty
     @NotNull
     private String country;
-    @NotEmpty
-    @NotNull
-    @Size(min = 5,max = 32)
+
     private String userLogin;
 }
 

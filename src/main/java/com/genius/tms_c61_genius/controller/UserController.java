@@ -1,5 +1,6 @@
 package com.genius.tms_c61_genius.controller;
 
+import com.genius.tms_c61_genius.aspect.TrackExecutionTime;
 import com.genius.tms_c61_genius.model.request.UserReqDto;
 import com.genius.tms_c61_genius.model.response.CommentResDto;
 import com.genius.tms_c61_genius.model.response.UserResDto;
@@ -24,11 +25,13 @@ public class UserController {
     }
 
     @PostMapping("/admin/user")
+    @TrackExecutionTime
     public ResponseEntity<UserResDto> createUser(@Valid @RequestBody UserReqDto user) {
         return new ResponseEntity<>(userService.createUser(user), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/user/{login}")
+    @TrackExecutionTime
     public ResponseEntity<HttpStatus> deleteUser(@PathVariable String login){
         userService.deleteUser(login);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

@@ -1,5 +1,6 @@
 package com.genius.tms_c61_genius.controller;
 
+import com.genius.tms_c61_genius.aspect.TrackExecutionTime;
 import com.genius.tms_c61_genius.model.request.SoundProducerReqDto;
 import com.genius.tms_c61_genius.model.response.SoundProducerResDto;
 import com.genius.tms_c61_genius.service.SoundProducerService;
@@ -17,11 +18,13 @@ public class SoundProducerController {
     }
 
     @PostMapping("/admin/producer")
+    @TrackExecutionTime
     ResponseEntity<SoundProducerResDto>createSoundProducer(@RequestBody SoundProducerReqDto soundProducerReqDto){
         return new ResponseEntity<>(soundProducerService.createSoundProducer(soundProducerReqDto), HttpStatus.CREATED);
     }
 
     @PutMapping("/admin/producer")
+    @TrackExecutionTime
     ResponseEntity<SoundProducerResDto>updateSoundProducer(@RequestBody SoundProducerReqDto soundProducerReqDto){
         return new ResponseEntity<>(soundProducerService.updateProducer(soundProducerReqDto),HttpStatus.OK);
     }
@@ -38,11 +41,13 @@ public class SoundProducerController {
 
 
     @DeleteMapping("/admin/producer")
+    @TrackExecutionTime
     ResponseEntity<HttpStatus>deleteSoundProducerById(@RequestParam Integer id){
         soundProducerService.deleteProducerById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
     @DeleteMapping("/admin/producer/{nickname}")
+    @TrackExecutionTime
     ResponseEntity<HttpStatus>deleteSoundProducerByNickName(@PathVariable String nickname){
         soundProducerService.deleteProducerByNickName(nickname);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
