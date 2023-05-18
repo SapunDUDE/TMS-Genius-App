@@ -1,66 +1,65 @@
-2023-05-18 15:57:54,423 INFO com.genius.tms_c61_genius.TmsC61GeniusApplication [restartedMain] Starting TmsC61GeniusApplication using Java 17.0.5 with PID 14144 (D:\Java\Java.projects\tms_c61_genius\target\classes started by ASUS in D:\Java\Java.projects\tms_c61_genius)
-2023-05-18 15:57:54,427 INFO com.genius.tms_c61_genius.TmsC61GeniusApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
-2023-05-18 15:57:56,279 INFO org.apache.catalina.core.StandardService [restartedMain] Starting service [Tomcat]
-2023-05-18 15:57:56,279 INFO org.apache.catalina.core.StandardEngine [restartedMain] Starting Servlet engine: [Apache Tomcat/10.1.8]
-2023-05-18 15:57:56,348 INFO org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [restartedMain] Initializing Spring embedded WebApplicationContext
-2023-05-18 15:57:56,591 INFO com.zaxxer.hikari.HikariDataSource [restartedMain] HikariPool-1 - Starting...
-2023-05-18 15:57:56,770 INFO com.zaxxer.hikari.pool.HikariPool [restartedMain] HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@7c684ef8
-2023-05-18 15:57:56,772 INFO com.zaxxer.hikari.HikariDataSource [restartedMain] HikariPool-1 - Start completed.
-2023-05-18 15:57:56,810 INFO org.hibernate.jpa.internal.util.LogHelper [restartedMain] HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-05-18 15:57:56,857 INFO org.hibernate.Version [restartedMain] HHH000412: Hibernate ORM core version 6.1.7.Final
-2023-05-18 15:57:57,159 INFO SQL dialect [restartedMain] HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
-2023-05-18 15:57:58,042 INFO org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator [restartedMain] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2023-05-18 15:57:59,380 INFO com.genius.tms_c61_genius.TmsC61GeniusApplication [restartedMain] Started TmsC61GeniusApplication in 5.412 seconds (process running for 6.044)
-2023-05-18 15:57:59,695 INFO org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [RMI TCP Connection(3)-192.168.100.130] Initializing Spring DispatcherServlet 'dispatcherServlet'
-2023-05-18 15:58:28,330 INFO com.genius.tms_c61_genius.aspect.LoggerAspect [http-nio-8080-exec-2] Class Name: com.genius.tms_c61_genius.controller.SongController. Method Name: getSongComments. Time taken for Execution is : 204ms
-2023-05-18 15:58:48,503 INFO com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown initiated...
-2023-05-18 15:58:48,510 INFO com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown completed.
-2023-05-18 16:00:41,821 INFO com.genius.tms_c61_genius.TmsC61GeniusApplication [restartedMain] Starting TmsC61GeniusApplication using Java 17.0.5 with PID 7592 (D:\Java\Java.projects\tms_c61_genius\target\classes started by ASUS in D:\Java\Java.projects\tms_c61_genius)
-2023-05-18 16:00:41,824 INFO com.genius.tms_c61_genius.TmsC61GeniusApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
-2023-05-18 16:00:43,567 INFO org.apache.catalina.core.StandardService [restartedMain] Starting service [Tomcat]
-2023-05-18 16:00:43,567 INFO org.apache.catalina.core.StandardEngine [restartedMain] Starting Servlet engine: [Apache Tomcat/10.1.8]
-2023-05-18 16:00:43,628 INFO org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [restartedMain] Initializing Spring embedded WebApplicationContext
-2023-05-18 16:00:43,849 INFO com.zaxxer.hikari.HikariDataSource [restartedMain] HikariPool-1 - Starting...
-2023-05-18 16:00:44,035 INFO com.zaxxer.hikari.pool.HikariPool [restartedMain] HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@5a721db
-2023-05-18 16:00:44,039 INFO com.zaxxer.hikari.HikariDataSource [restartedMain] HikariPool-1 - Start completed.
-2023-05-18 16:00:44,100 INFO org.hibernate.jpa.internal.util.LogHelper [restartedMain] HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-05-18 16:00:44,153 INFO org.hibernate.Version [restartedMain] HHH000412: Hibernate ORM core version 6.1.7.Final
-2023-05-18 16:00:44,453 INFO SQL dialect [restartedMain] HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
-2023-05-18 16:00:45,380 INFO org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator [restartedMain] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2023-05-18 16:00:47,487 INFO com.genius.tms_c61_genius.TmsC61GeniusApplication [restartedMain] Started TmsC61GeniusApplication in 6.053 seconds (process running for 6.686)
-2023-05-18 16:00:48,176 INFO org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [RMI TCP Connection(3)-192.168.100.130] Initializing Spring DispatcherServlet 'dispatcherServlet'
-2023-05-18 16:09:38,875 INFO com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown initiated...
-2023-05-18 16:09:38,878 INFO com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown completed.
-2023-05-18 16:09:41,887 INFO com.genius.tms_c61_genius.TmsC61GeniusApplication [restartedMain] Starting TmsC61GeniusApplication using Java 17.0.5 with PID 14704 (D:\Java\Java.projects\tms_c61_genius\target\classes started by ASUS in D:\Java\Java.projects\tms_c61_genius)
-2023-05-18 16:09:41,889 INFO com.genius.tms_c61_genius.TmsC61GeniusApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
-2023-05-18 16:09:43,548 INFO org.apache.catalina.core.StandardService [restartedMain] Starting service [Tomcat]
-2023-05-18 16:09:43,548 INFO org.apache.catalina.core.StandardEngine [restartedMain] Starting Servlet engine: [Apache Tomcat/10.1.8]
-2023-05-18 16:09:43,605 INFO org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [restartedMain] Initializing Spring embedded WebApplicationContext
-2023-05-18 16:09:43,813 INFO com.zaxxer.hikari.HikariDataSource [restartedMain] HikariPool-1 - Starting...
-2023-05-18 16:09:43,983 INFO com.zaxxer.hikari.pool.HikariPool [restartedMain] HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@127565aa
-2023-05-18 16:09:43,985 INFO com.zaxxer.hikari.HikariDataSource [restartedMain] HikariPool-1 - Start completed.
-2023-05-18 16:09:44,023 INFO org.hibernate.jpa.internal.util.LogHelper [restartedMain] HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-05-18 16:09:44,072 INFO org.hibernate.Version [restartedMain] HHH000412: Hibernate ORM core version 6.1.7.Final
-2023-05-18 16:09:44,340 INFO SQL dialect [restartedMain] HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
-2023-05-18 16:09:45,266 INFO org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator [restartedMain] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2023-05-18 16:09:46,520 INFO com.genius.tms_c61_genius.TmsC61GeniusApplication [restartedMain] Started TmsC61GeniusApplication in 5.026 seconds (process running for 5.632)
-2023-05-18 16:09:46,649 INFO org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [RMI TCP Connection(2)-192.168.100.130] Initializing Spring DispatcherServlet 'dispatcherServlet'
-2023-05-18 16:12:38,266 INFO com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown initiated...
-2023-05-18 16:12:38,275 INFO com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown completed.
-2023-05-18 16:12:43,631 INFO com.genius.tms_c61_genius.TmsC61GeniusApplication [restartedMain] Starting TmsC61GeniusApplication using Java 17.0.5 with PID 2292 (D:\Java\Java.projects\tms_c61_genius\target\classes started by ASUS in D:\Java\Java.projects\tms_c61_genius)
-2023-05-18 16:12:43,635 INFO com.genius.tms_c61_genius.TmsC61GeniusApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
-2023-05-18 16:12:45,373 INFO org.apache.catalina.core.StandardService [restartedMain] Starting service [Tomcat]
-2023-05-18 16:12:45,373 INFO org.apache.catalina.core.StandardEngine [restartedMain] Starting Servlet engine: [Apache Tomcat/10.1.8]
-2023-05-18 16:12:45,430 INFO org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [restartedMain] Initializing Spring embedded WebApplicationContext
-2023-05-18 16:12:45,642 INFO com.zaxxer.hikari.HikariDataSource [restartedMain] HikariPool-1 - Starting...
-2023-05-18 16:12:45,818 INFO com.zaxxer.hikari.pool.HikariPool [restartedMain] HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@58fe0a56
-2023-05-18 16:12:45,819 INFO com.zaxxer.hikari.HikariDataSource [restartedMain] HikariPool-1 - Start completed.
-2023-05-18 16:12:45,858 INFO org.hibernate.jpa.internal.util.LogHelper [restartedMain] HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-05-18 16:12:45,906 INFO org.hibernate.Version [restartedMain] HHH000412: Hibernate ORM core version 6.1.7.Final
-2023-05-18 16:12:46,175 INFO SQL dialect [restartedMain] HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
-2023-05-18 16:12:47,038 INFO org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator [restartedMain] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2023-05-18 16:12:48,327 INFO com.genius.tms_c61_genius.TmsC61GeniusApplication [restartedMain] Started TmsC61GeniusApplication in 5.14 seconds (process running for 5.786)
-2023-05-18 16:12:48,878 INFO org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [RMI TCP Connection(3)-192.168.100.130] Initializing Spring DispatcherServlet 'dispatcherServlet'
-2023-05-18 16:13:02,153 INFO com.genius.tms_c61_genius.aspect.LoggerAspect [http-nio-8080-exec-2] Class Name: com.genius.tms_c61_genius.controller.SongController. Method Name: getSongComments. Time taken for Execution is : 172ms
-2023-05-18 16:13:20,141 INFO com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown initiated...
-2023-05-18 16:13:20,149 INFO com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown completed.
+2023-05-18 16:53:40,755 INFO com.genius.tms_c61_genius.TmsC61GeniusApplication [restartedMain] Starting TmsC61GeniusApplication using Java 17.0.5 with PID 4568 (D:\Java\Java.projects\tms_c61_genius\target\classes started by ASUS in D:\Java\Java.projects\tms_c61_genius)
+2023-05-18 16:53:40,758 INFO com.genius.tms_c61_genius.TmsC61GeniusApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2023-05-18 16:53:42,899 INFO org.apache.catalina.core.StandardService [restartedMain] Starting service [Tomcat]
+2023-05-18 16:53:42,900 INFO org.apache.catalina.core.StandardEngine [restartedMain] Starting Servlet engine: [Apache Tomcat/10.1.8]
+2023-05-18 16:53:42,955 INFO org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [restartedMain] Initializing Spring embedded WebApplicationContext
+2023-05-18 16:53:43,210 INFO com.zaxxer.hikari.HikariDataSource [restartedMain] HikariPool-1 - Starting...
+2023-05-18 16:53:43,381 INFO com.zaxxer.hikari.pool.HikariPool [restartedMain] HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@3810accc
+2023-05-18 16:53:43,383 INFO com.zaxxer.hikari.HikariDataSource [restartedMain] HikariPool-1 - Start completed.
+2023-05-18 16:53:43,422 INFO org.hibernate.jpa.internal.util.LogHelper [restartedMain] HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-05-18 16:53:43,471 INFO org.hibernate.Version [restartedMain] HHH000412: Hibernate ORM core version 6.1.7.Final
+2023-05-18 16:53:43,777 INFO SQL dialect [restartedMain] HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2023-05-18 16:53:44,648 INFO org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator [restartedMain] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-05-18 16:53:46,032 INFO com.genius.tms_c61_genius.TmsC61GeniusApplication [restartedMain] Started TmsC61GeniusApplication in 5.725 seconds (process running for 6.392)
+2023-05-18 16:53:46,785 INFO org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [RMI TCP Connection(6)-192.168.100.130] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-05-18 16:54:32,889 INFO com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown initiated...
+2023-05-18 16:54:32,892 INFO com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown completed.
+2023-05-18 16:59:38,455 INFO com.genius.tms_c61_genius.TmsC61GeniusApplication [restartedMain] Starting TmsC61GeniusApplication using Java 17.0.5 with PID 14928 (D:\Java\Java.projects\tms_c61_genius\target\classes started by ASUS in D:\Java\Java.projects\tms_c61_genius)
+2023-05-18 16:59:38,458 INFO com.genius.tms_c61_genius.TmsC61GeniusApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2023-05-18 16:59:40,395 INFO org.apache.catalina.core.StandardService [restartedMain] Starting service [Tomcat]
+2023-05-18 16:59:40,396 INFO org.apache.catalina.core.StandardEngine [restartedMain] Starting Servlet engine: [Apache Tomcat/10.1.8]
+2023-05-18 16:59:40,470 INFO org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [restartedMain] Initializing Spring embedded WebApplicationContext
+2023-05-18 16:59:40,746 INFO com.zaxxer.hikari.HikariDataSource [restartedMain] HikariPool-1 - Starting...
+2023-05-18 16:59:40,940 INFO com.zaxxer.hikari.pool.HikariPool [restartedMain] HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@3810accc
+2023-05-18 16:59:40,942 INFO com.zaxxer.hikari.HikariDataSource [restartedMain] HikariPool-1 - Start completed.
+2023-05-18 16:59:40,982 INFO org.hibernate.jpa.internal.util.LogHelper [restartedMain] HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-05-18 16:59:41,029 INFO org.hibernate.Version [restartedMain] HHH000412: Hibernate ORM core version 6.1.7.Final
+2023-05-18 16:59:41,321 INFO SQL dialect [restartedMain] HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2023-05-18 16:59:42,223 INFO org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator [restartedMain] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-05-18 16:59:43,724 INFO com.genius.tms_c61_genius.TmsC61GeniusApplication [restartedMain] Started TmsC61GeniusApplication in 5.704 seconds (process running for 6.347)
+2023-05-18 16:59:44,249 INFO org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [RMI TCP Connection(1)-192.168.100.130] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-05-18 17:00:19,459 INFO com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown initiated...
+2023-05-18 17:00:19,467 INFO com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown completed.
+2023-05-18 17:00:24,914 INFO com.genius.tms_c61_genius.TmsC61GeniusApplication [restartedMain] Starting TmsC61GeniusApplication using Java 17.0.5 with PID 21036 (D:\Java\Java.projects\tms_c61_genius\target\classes started by ASUS in D:\Java\Java.projects\tms_c61_genius)
+2023-05-18 17:00:24,917 INFO com.genius.tms_c61_genius.TmsC61GeniusApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2023-05-18 17:00:26,729 INFO org.apache.catalina.core.StandardService [restartedMain] Starting service [Tomcat]
+2023-05-18 17:00:26,729 INFO org.apache.catalina.core.StandardEngine [restartedMain] Starting Servlet engine: [Apache Tomcat/10.1.8]
+2023-05-18 17:00:26,790 INFO org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [restartedMain] Initializing Spring embedded WebApplicationContext
+2023-05-18 17:00:27,150 INFO com.zaxxer.hikari.HikariDataSource [restartedMain] HikariPool-1 - Starting...
+2023-05-18 17:00:27,347 INFO com.zaxxer.hikari.pool.HikariPool [restartedMain] HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@61a44abc
+2023-05-18 17:00:27,348 INFO com.zaxxer.hikari.HikariDataSource [restartedMain] HikariPool-1 - Start completed.
+2023-05-18 17:00:27,394 INFO org.hibernate.jpa.internal.util.LogHelper [restartedMain] HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-05-18 17:00:27,450 INFO org.hibernate.Version [restartedMain] HHH000412: Hibernate ORM core version 6.1.7.Final
+2023-05-18 17:00:27,801 INFO SQL dialect [restartedMain] HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2023-05-18 17:00:28,736 INFO org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator [restartedMain] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-05-18 17:00:30,212 INFO com.genius.tms_c61_genius.TmsC61GeniusApplication [restartedMain] Started TmsC61GeniusApplication in 5.77 seconds (process running for 6.465)
+2023-05-18 17:00:30,738 INFO org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [RMI TCP Connection(1)-192.168.100.130] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-05-18 17:00:46,175 INFO com.genius.tms_c61_genius.aspect.LoggerAspect [http-nio-8080-exec-4] Class Name: com.genius.tms_c61_genius.controller.UserController. Method Name: getUser. Time taken for Execution is : 164ms
+2023-05-18 17:00:59,640 INFO com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown initiated...
+2023-05-18 17:00:59,649 INFO com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown completed.
+2023-05-18 17:03:34,343 INFO com.genius.tms_c61_genius.TmsC61GeniusApplication [restartedMain] Starting TmsC61GeniusApplication using Java 17.0.5 with PID 21724 (D:\Java\Java.projects\tms_c61_genius\target\classes started by ASUS in D:\Java\Java.projects\tms_c61_genius)
+2023-05-18 17:03:34,346 INFO com.genius.tms_c61_genius.TmsC61GeniusApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2023-05-18 17:03:36,302 INFO org.apache.catalina.core.StandardService [restartedMain] Starting service [Tomcat]
+2023-05-18 17:03:36,303 INFO org.apache.catalina.core.StandardEngine [restartedMain] Starting Servlet engine: [Apache Tomcat/10.1.8]
+2023-05-18 17:03:36,364 INFO org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [restartedMain] Initializing Spring embedded WebApplicationContext
+2023-05-18 17:03:36,588 INFO com.zaxxer.hikari.HikariDataSource [restartedMain] HikariPool-1 - Starting...
+2023-05-18 17:03:36,771 INFO com.zaxxer.hikari.pool.HikariPool [restartedMain] HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@2d80d4eb
+2023-05-18 17:03:36,772 INFO com.zaxxer.hikari.HikariDataSource [restartedMain] HikariPool-1 - Start completed.
+2023-05-18 17:03:36,813 INFO org.hibernate.jpa.internal.util.LogHelper [restartedMain] HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-05-18 17:03:36,859 INFO org.hibernate.Version [restartedMain] HHH000412: Hibernate ORM core version 6.1.7.Final
+2023-05-18 17:03:37,162 INFO SQL dialect [restartedMain] HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2023-05-18 17:03:38,044 INFO org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator [restartedMain] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-05-18 17:03:39,418 INFO com.genius.tms_c61_genius.TmsC61GeniusApplication [restartedMain] Started TmsC61GeniusApplication in 5.575 seconds (process running for 6.316)
+2023-05-18 17:03:39,580 INFO org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [RMI TCP Connection(6)-192.168.100.130] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-05-18 17:04:39,482 INFO com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown initiated...
+2023-05-18 17:04:39,487 INFO com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown completed.

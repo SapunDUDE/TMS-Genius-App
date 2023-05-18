@@ -38,6 +38,7 @@ public class UserController {
     }
 
     @GetMapping("/user/{login}")
+    @TrackExecutionTime
     public ResponseEntity<UserResDto> getUser(@PathVariable String login){
         return new ResponseEntity<>(userService.getUser(login),HttpStatus.OK);
     }
