@@ -8,9 +8,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class SongReqDto {
-    private String songTitle;
-    private String text;
-    private int duration;
-
+public class CommentReqDto {
+    private String content;
+    private float rating;
+    private Integer userId;
+    private Integer songId;
 }

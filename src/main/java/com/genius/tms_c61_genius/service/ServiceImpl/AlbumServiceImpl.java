@@ -1,7 +1,6 @@
 package com.genius.tms_c61_genius.service.ServiceImpl;
 
 import com.genius.tms_c61_genius.mapper.AlbumDtoMapper;
-import com.genius.tms_c61_genius.mapper.ArtistDtoMapper;
 import com.genius.tms_c61_genius.mapper.SongDtoMapper;
 import com.genius.tms_c61_genius.model.request.AlbumReqDto;
 import com.genius.tms_c61_genius.model.response.AlbumResDto;
@@ -24,7 +23,7 @@ public class AlbumServiceImpl implements AlbumService {
     private final SoundProducerRepository soundProducerRepository;
     private final SongDtoMapper songDtoMapper;
     private final ArtistRepository artistRepository;
-   
+
 
     @Autowired
     public AlbumServiceImpl(AlbumDtoMapper albumDtoMapper,

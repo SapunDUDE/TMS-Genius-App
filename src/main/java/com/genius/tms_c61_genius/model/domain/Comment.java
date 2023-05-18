@@ -3,12 +3,16 @@ package com.genius.tms_c61_genius.model.domain;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
+
 @Data
 @EqualsAndHashCode(exclude={"song","user"})
 @ToString(exclude = {"song","user"})
 @Component
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "comment")
 public class Comment {
@@ -23,10 +27,9 @@ public class Comment {
 
     @Column(name = "rating")
     private float rating;
-    @ManyToOne(fetch = FetchType.LAZY )
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,CascadeType.MERGE,CascadeType.DETACH,CascadeType.PERSIST})
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "song_id", referencedColumnName = "id")
+    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,CascadeType.MERGE,CascadeType.DETACH,CascadeType.PERSIST})
     private Song song;
 }

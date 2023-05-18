@@ -6,6 +6,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
+
 @Data
 @Builder
 @Component
@@ -17,7 +20,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "users_seq")
     @SequenceGenerator(name = "users_seq", sequenceName = "user_table_id_seq", allocationSize = 1)
-    private int id;
+    private Integer id;
     @Column(name = "login")
     private String login;
     @Column(name = "password_hash")
@@ -29,4 +32,7 @@ public class User {
     private Role role;
     @OneToOne(mappedBy = "user")
     private Artist artist;
+
+    @OneToMany(mappedBy = "user")
+    List<Comment> comments;
 }
