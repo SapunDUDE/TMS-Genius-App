@@ -5,6 +5,7 @@ import lombok.*;
 import org.springframework.stereotype.Component;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -26,17 +27,24 @@ public class Album {
     private String albumTitle;
     @Column(name = "created")
     private Date created;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY,cascade = {CascadeType.REFRESH,CascadeType.MERGE,CascadeType.DETACH,CascadeType.PERSIST})
     @JoinColumn(name = "album_type_id", referencedColumnName = "id")
     private AlbumType albumType;
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,CascadeType.MERGE,CascadeType.DETACH,CascadeType.PERSIST})
     @JoinColumn(name = "label_id", referencedColumnName = "id")
     private Label label;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(fetch =FetchType.LAZY,cascade = {CascadeType.REFRESH,CascadeType.MERGE,CascadeType.DETACH,CascadeType.PERSIST})
     @JoinColumn(name = "genre_id", referencedColumnName = "id")
     private  Genre genre;
-    @ManyToMany(mappedBy = "albums")
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,CascadeType.MERGE,CascadeType.DETACH,CascadeType.PERSIST})
+    @JoinTable(name = "l_artist_album",
+            joinColumns = @JoinColumn(name = "album_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "artist_id", referencedColumnName = "id")
+    )
     private List<Artist> artists;
-    @ManyToMany(mappedBy = "albums")
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,CascadeType.MERGE,CascadeType.DETACH,CascadeType.PERSIST})
+    @JoinTable(name = "l_sound_producer_album", joinColumns = @JoinColumn(name = "album_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "sound_producer_id", referencedColumnName = "id"))
     private List<SoundProducer> soundProducers;
 }

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -25,8 +26,6 @@ public class SoundProducer {
     @JoinColumn(name = "person_info_id", referencedColumnName = "id")
     private PersonInfo personInfo;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,CascadeType.MERGE,CascadeType.DETACH,CascadeType.PERSIST})
-    @JoinTable(name = "l_sound_producer_album", joinColumns = @JoinColumn(name = "sound_producer_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "album_id", referencedColumnName = "id"))
+    @ManyToMany(mappedBy = "soundProducers")
     private List<Album> albums;
 }

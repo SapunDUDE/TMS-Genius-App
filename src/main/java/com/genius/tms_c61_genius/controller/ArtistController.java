@@ -3,11 +3,13 @@ package com.genius.tms_c61_genius.controller;
 import com.genius.tms_c61_genius.model.request.ArtistReqDto;
 import com.genius.tms_c61_genius.model.request.UpdateArtistReqDto;
 import com.genius.tms_c61_genius.model.response.ArtistResDto;
+import com.genius.tms_c61_genius.model.response.SongResDto;
 import com.genius.tms_c61_genius.service.ArtistService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import java.util.List;
 
 @RestController
 public class ArtistController {
@@ -47,4 +49,14 @@ public class ArtistController {
     public ResponseEntity<ArtistResDto>getArtistByUser(@RequestParam String userlogin){
         return new ResponseEntity<>(artistService.getArtistByUser(userlogin),HttpStatus.OK);
     }
+
+    @GetMapping("/artist/albums/{nickname}")
+    public ResponseEntity<List<String>>getAlbums(@PathVariable String nickname ){
+        return new ResponseEntity<>(artistService.getAlbums(nickname),HttpStatus.OK);
+    }
+    @GetMapping("/artist/songs/{nickname}")
+    public ResponseEntity<List<SongResDto>>getSongs(@PathVariable String nickname ){
+        return new ResponseEntity<>(artistService.getSongs(nickname),HttpStatus.OK);
+    }
+
 }

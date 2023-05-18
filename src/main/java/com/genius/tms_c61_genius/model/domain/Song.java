@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -12,6 +13,7 @@ import java.util.List;
 @Component
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "song")
 public class Song {
@@ -26,10 +28,15 @@ public class Song {
     private String text;
     @Column(name = "duration")
     private int duration;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,CascadeType.MERGE,CascadeType.DETACH,CascadeType.PERSIST})
     @JoinColumn(name = "album_id", referencedColumnName = "id")
     private Album album;
-    @ManyToMany(mappedBy = "songs")
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,CascadeType.MERGE,CascadeType.DETACH,CascadeType.PERSIST})
+    @JoinTable(name = "l_artist_song",
+            joinColumns = @JoinColumn(name = "song_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "artist_id", referencedColumnName = "id")
+    )
     private List<Artist> artists;
 
 }

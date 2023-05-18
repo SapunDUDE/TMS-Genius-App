@@ -1,8 +1,11 @@
 package com.genius.tms_c61_genius.service;
 
+import com.genius.tms_c61_genius.model.domain.Artist;
 import com.genius.tms_c61_genius.model.request.ArtistReqDto;
 import com.genius.tms_c61_genius.model.request.UpdateArtistReqDto;
 import com.genius.tms_c61_genius.model.response.ArtistResDto;
+import com.genius.tms_c61_genius.model.response.SongResDto;
+import java.util.List;
 
 
 public interface ArtistService {
@@ -14,4 +17,7 @@ public interface ArtistService {
 
     ArtistResDto getArtistByNickName(String nickName);
     ArtistResDto getArtistByUser(String userLogin);
+    List<SongResDto> getSongs(String nickName);
+    List<String> getAlbums(String nickName);
+
 }

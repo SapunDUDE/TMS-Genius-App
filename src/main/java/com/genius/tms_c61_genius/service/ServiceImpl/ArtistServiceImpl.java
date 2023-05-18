@@ -1,17 +1,19 @@
 package com.genius.tms_c61_genius.service.ServiceImpl;
 
 import com.genius.tms_c61_genius.mapper.ArtistDtoMapper;
+import com.genius.tms_c61_genius.mapper.SongDtoMapper;
 import com.genius.tms_c61_genius.model.domain.Artist;
 import com.genius.tms_c61_genius.model.request.ArtistReqDto;
 import com.genius.tms_c61_genius.model.request.UpdateArtistReqDto;
 import com.genius.tms_c61_genius.model.response.ArtistResDto;
-import com.genius.tms_c61_genius.repository.ArtistRepository;
-import com.genius.tms_c61_genius.repository.PersonInfoRepository;
-import com.genius.tms_c61_genius.repository.UserRepository;
+import com.genius.tms_c61_genius.model.response.SongResDto;
+import com.genius.tms_c61_genius.repository.*;
 import com.genius.tms_c61_genius.service.ArtistService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 public class ArtistServiceImpl implements ArtistService {
@@ -19,13 +21,24 @@ public class ArtistServiceImpl implements ArtistService {
     private final UserRepository userRepository;
     private final ArtistDtoMapper artistDtoMapper;
     private final PersonInfoRepository personInfoRepository;
-
+    private final SongRepository songRepository;
+    private final SongDtoMapper songDtoMapper;
+    private final AlbumRepository albumRepository;
     @Autowired
-    public ArtistServiceImpl(ArtistRepository artistRepository, UserRepository userRepository, ArtistDtoMapper artistDtoMapper, PersonInfoRepository personInfoRepository) {
+    public ArtistServiceImpl(ArtistRepository artistRepository,
+                             UserRepository userRepository,
+                             ArtistDtoMapper artistDtoMapper,
+                             PersonInfoRepository personInfoRepository,
+                             SongRepository songRepository,
+                             SongDtoMapper songDtoMapper,
+                             AlbumRepository albumRepository) {
         this.artistRepository = artistRepository;
         this.userRepository = userRepository;
         this.artistDtoMapper = artistDtoMapper;
         this.personInfoRepository = personInfoRepository;
+        this.songRepository = songRepository;
+        this.songDtoMapper = songDtoMapper;
+        this.albumRepository = albumRepository;
     }
 
     @Override
@@ -65,5 +78,21 @@ public class ArtistServiceImpl implements ArtistService {
          artistDtoMapper.updateArtistInfo(artistToUpdate,updateArtistReqDto);
          artistRepository.save(artistToUpdate);
          return artistDtoMapper.artistToArtistRes(artistToUpdate);
+    }
+
+    @Override
+    public List<SongResDto> getSongs(String nickName) {
+        return songRepository.getSongsByArtists(artistRepository.getArtistByPersonInfoNickname(nickName).get())
+                .stream()
+                .map(song-> songDtoMapper.songToSongRes(song))
+                .toList();
+    }
+
+    @Override
+    public List<String> getAlbums(String nickName) {
+       return albumRepository.findAlbumsByArtists(artistRepository.getArtistByPersonInfoNickname(nickName).get())
+               .stream()
+               .map(album->album.getAlbumTitle())
+               .toList();
     }
 }
