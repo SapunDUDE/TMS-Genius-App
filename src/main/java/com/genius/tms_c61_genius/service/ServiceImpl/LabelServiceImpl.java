@@ -23,23 +23,26 @@ public class LabelServiceImpl implements LabelService {
 
     @Override
     public LabelResDto createLabel(LabelReqDto labelReqDto) {
-        if(labelRepository.existsLabelByLabelName(labelReqDto.getLabelName()))
+        if(labelRepository.existsLabelByLabelName(labelReqDto.getLabelName())) {
             throw new BadDataException("label with such name is already exist");
+        }
         Label savedLabel = labelRepository.save(labelDtoMapper.labelReqToLabel(labelReqDto));
         return labelDtoMapper.labelToLabelRes(savedLabel);
     }
 
     @Override
     public LabelResDto getLabelInfo(String labelName) {
-        if(!labelRepository.existsLabelByLabelName(labelName))
+        if(!labelRepository.existsLabelByLabelName(labelName)) {
             throw new NotFoundException("label not found");
+        }
         return labelDtoMapper.labelToLabelRes(labelRepository.getLabelByLabelName(labelName));
     }
 
     @Override
     public LabelResDto updateLabelInfo(LabelReqDto labelReqDto) {
-        if(!labelRepository.existsLabelByLabelName(labelReqDto.getLabelName()))
+        if(!labelRepository.existsLabelByLabelName(labelReqDto.getLabelName())) {
             throw new NotFoundException("label not found");
+        }
         Label updatedLabel = labelRepository.getLabelByLabelName(labelReqDto.getLabelName());
         updatedLabel.setDescription(labelReqDto.getDescription());
         return labelDtoMapper.labelToLabelRes(updatedLabel);
@@ -47,8 +50,9 @@ public class LabelServiceImpl implements LabelService {
 
     @Override
     public void deleteLabel(String labelName) {
-        if(!labelRepository.existsLabelByLabelName(labelName))
+        if(!labelRepository.existsLabelByLabelName(labelName)) {
             throw new NotFoundException("label not found");
+        }
         labelRepository.delete(labelRepository.getLabelByLabelName(labelName));
     }
 }

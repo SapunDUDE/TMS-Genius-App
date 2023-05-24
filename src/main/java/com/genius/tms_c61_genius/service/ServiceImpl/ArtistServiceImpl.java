@@ -9,7 +9,11 @@ import com.genius.tms_c61_genius.model.request.ArtistReqDto;
 import com.genius.tms_c61_genius.model.request.UpdateArtistReqDto;
 import com.genius.tms_c61_genius.model.response.ArtistResDto;
 import com.genius.tms_c61_genius.model.response.SongResDto;
-import com.genius.tms_c61_genius.repository.*;
+import com.genius.tms_c61_genius.repository.AlbumRepository;
+import com.genius.tms_c61_genius.repository.ArtistRepository;
+import com.genius.tms_c61_genius.repository.PersonInfoRepository;
+import com.genius.tms_c61_genius.repository.SongRepository;
+import com.genius.tms_c61_genius.repository.UserRepository;
 import com.genius.tms_c61_genius.service.ArtistService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,24 +24,18 @@ import java.util.List;
 @Service
 public class ArtistServiceImpl implements ArtistService {
     private final ArtistRepository artistRepository;
-    private final UserRepository userRepository;
     private final ArtistDtoMapper artistDtoMapper;
-    private final PersonInfoRepository personInfoRepository;
     private final SongRepository songRepository;
     private final SongDtoMapper songDtoMapper;
     private final AlbumRepository albumRepository;
     @Autowired
     public ArtistServiceImpl(ArtistRepository artistRepository,
-                             UserRepository userRepository,
                              ArtistDtoMapper artistDtoMapper,
-                             PersonInfoRepository personInfoRepository,
                              SongRepository songRepository,
                              SongDtoMapper songDtoMapper,
                              AlbumRepository albumRepository) {
         this.artistRepository = artistRepository;
-        this.userRepository = userRepository;
         this.artistDtoMapper = artistDtoMapper;
-        this.personInfoRepository = personInfoRepository;
         this.songRepository = songRepository;
         this.songDtoMapper = songDtoMapper;
         this.albumRepository = albumRepository;
@@ -46,8 +44,9 @@ public class ArtistServiceImpl implements ArtistService {
     @Override
     @Transactional
     public ArtistResDto createArtist(ArtistReqDto artistReqDto) {
-        if(artistRepository.existsArtistByPersonInfoNickname(artistReqDto.getNickname()))
+        if(artistRepository.existsArtistByPersonInfoNickname(artistReqDto.getNickname())) {
             throw new BadDataException("artist with such nickname is already exist");
+        }
         Artist savedArtist =  artistDtoMapper.artistReqToArtist(artistReqDto);
         artistRepository.save(savedArtist);
         return artistDtoMapper.artistToArtistRes(savedArtist);
@@ -55,39 +54,44 @@ public class ArtistServiceImpl implements ArtistService {
 
     @Override
     public ArtistResDto getArtistByUser(String userLogin) {
-        if(!artistRepository.existsArtistByUserLogin(userLogin))
+        if(!artistRepository.existsArtistByUserLogin(userLogin)) {
             throw new NotFoundException("artist not found");
+        }
         return artistDtoMapper.artistToArtistRes(artistRepository.getArtistByUser_Login(userLogin));
     }
 
     @Override
     public ArtistResDto getArtistByNickName(String nickName) {
-        if(!artistRepository.existsArtistByPersonInfoNickname(nickName))
+        if(!artistRepository.existsArtistByPersonInfoNickname(nickName)) {
             throw new NotFoundException("artist not found");
+        }
         return artistDtoMapper.artistToArtistRes(artistRepository.getArtistByPersonInfoNickname(nickName).get());
     }
 
     @Override
     @Transactional
     public void deleteArtistByUser(String userLogin) {
-        if(!artistRepository.existsArtistByUserLogin(userLogin))
+        if(!artistRepository.existsArtistByUserLogin(userLogin)) {
             throw new NotFoundException("artist not found");
+        }
         artistRepository.deleteArtistByUser_Login(userLogin);
     }
 
     @Override
     @Transactional
     public void deleteArtistByNickName(String nickName) {
-        if(!artistRepository.existsArtistByPersonInfoNickname(nickName))
+        if(!artistRepository.existsArtistByPersonInfoNickname(nickName)) {
             throw new NotFoundException("artist not found");
+        }
         artistRepository.deleteArtistByPersonInfoNickname(nickName);
     }
 
     @Override
     @Transactional
     public ArtistResDto updateArtist(UpdateArtistReqDto updateArtistReqDto) {
-        if(artistRepository.existsArtistByPersonInfoNickname(updateArtistReqDto.getNickname()))
+        if(artistRepository.existsArtistByPersonInfoNickname(updateArtistReqDto.getNickname())) {
             throw new BadDataException("artist with such nickname is already exist");
+        }
          Artist artistToUpdate = artistRepository.getArtistByPersonInfoNickname(updateArtistReqDto.getNickname()).get();
          artistDtoMapper.updateArtistInfo(artistToUpdate,updateArtistReqDto);
          artistRepository.save(artistToUpdate);
@@ -96,8 +100,9 @@ public class ArtistServiceImpl implements ArtistService {
 
     @Override
     public List<SongResDto> getSongs(String nickName) {
-        if(!artistRepository.existsArtistByPersonInfoNickname(nickName))
+        if(!artistRepository.existsArtistByPersonInfoNickname(nickName)) {
             throw new NotFoundException("artist not found");
+        }
         return songRepository.getSongsByArtists(artistRepository.getArtistByPersonInfoNickname(nickName).get())
                 .stream()
                 .map(song-> songDtoMapper.songToSongRes(song))
@@ -106,8 +111,9 @@ public class ArtistServiceImpl implements ArtistService {
 
     @Override
     public List<String> getAlbums(String nickName) {
-        if(!artistRepository.existsArtistByPersonInfoNickname(nickName))
+        if(!artistRepository.existsArtistByPersonInfoNickname(nickName)) {
             throw new NotFoundException("artist not found");
+        }
        return albumRepository.findAlbumsByArtists(artistRepository.getArtistByPersonInfoNickname(nickName).get())
                .stream()
                .map(album->album.getAlbumTitle())

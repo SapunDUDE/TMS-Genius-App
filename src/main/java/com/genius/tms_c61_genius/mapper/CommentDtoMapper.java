@@ -3,7 +3,6 @@ package com.genius.tms_c61_genius.mapper;
 import com.genius.tms_c61_genius.model.domain.Comment;
 import com.genius.tms_c61_genius.model.request.CommentReqDto;
 import com.genius.tms_c61_genius.model.response.CommentResDto;
-import com.genius.tms_c61_genius.repository.CommentRepository;
 import com.genius.tms_c61_genius.repository.SongRepository;
 import com.genius.tms_c61_genius.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

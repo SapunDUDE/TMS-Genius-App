@@ -2,7 +2,6 @@ package com.genius.tms_c61_genius.mapper;
 
 
 import com.genius.tms_c61_genius.model.domain.PersonInfo;
-import com.genius.tms_c61_genius.model.domain.User;
 import com.genius.tms_c61_genius.model.request.ArtistReqDto;
 import com.genius.tms_c61_genius.model.request.UpdateArtistReqDto;
 import com.genius.tms_c61_genius.model.response.ArtistResDto;
@@ -11,8 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.genius.tms_c61_genius.model.domain.Artist;
 
-import java.sql.Date;
-import java.util.LinkedList;
 
 @Component
 public class ArtistDtoMapper {

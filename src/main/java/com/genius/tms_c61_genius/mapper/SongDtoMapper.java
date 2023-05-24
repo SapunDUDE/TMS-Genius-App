@@ -11,13 +11,12 @@ import java.util.List;
 
 @Component
 public class SongDtoMapper {
-    public Song songReqToSong(SongReqDto songReqDto, List<Artist> artists, Album album){
+    public Song songReqToSong(SongReqDto songReqDto, List<Artist> artists){
         return Song.builder()
                 .songTitle(songReqDto.getSongTitle())
                 .text(songReqDto.getText())
                 .duration(songReqDto.getDuration())
                 .artists(artists)
-                .album(album)
                 .build();
 
     }

@@ -6,13 +6,16 @@ import com.genius.tms_c61_genius.mapper.SongDtoMapper;
 import com.genius.tms_c61_genius.model.request.AlbumReqDto;
 import com.genius.tms_c61_genius.model.response.AlbumResDto;
 import com.genius.tms_c61_genius.model.response.SongResDto;
-import com.genius.tms_c61_genius.repository.*;
 import com.genius.tms_c61_genius.model.domain.Album;
+import com.genius.tms_c61_genius.repository.AlbumRepository;
+import com.genius.tms_c61_genius.repository.ArtistRepository;
+import com.genius.tms_c61_genius.repository.CommentRepository;
+import com.genius.tms_c61_genius.repository.SongRepository;
+import com.genius.tms_c61_genius.repository.SoundProducerRepository;
 import com.genius.tms_c61_genius.service.AlbumService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 
 import java.util.List;
 
@@ -31,9 +34,6 @@ public class AlbumServiceImpl implements AlbumService {
     public AlbumServiceImpl(AlbumDtoMapper albumDtoMapper,
                             AlbumRepository albumRepository,
                             SongRepository songRepository,
-                            GenreRepository genreRepository,
-                            AlbumTypeRepository albumTypeRepository,
-                            LabelRepository labelRepository,
                             SoundProducerRepository soundProducerRepository,
                             SongDtoMapper songDtoMapper,
                             ArtistRepository artistRepository,
@@ -61,8 +61,9 @@ public class AlbumServiceImpl implements AlbumService {
 
     @Override
     public List<String> getProducers(String albumTitle) {
-        if(!albumRepository.existsAlbumByAlbumTitle(albumTitle))
+        if(!albumRepository.existsAlbumByAlbumTitle(albumTitle)) {
             throw new BadDataException("album not found");
+        }
         return soundProducerRepository.getSoundProducersByAlbums(
                 albumRepository.getAlbumByAlbumTitle(albumTitle))
                 .stream().map(producer->producer.getPersonInfo().getNickname())
@@ -71,8 +72,9 @@ public class AlbumServiceImpl implements AlbumService {
 
     @Override
     public List<String> getArtists(String albumTitle) {
-        if(!albumRepository.existsAlbumByAlbumTitle(albumTitle))
+        if(!albumRepository.existsAlbumByAlbumTitle(albumTitle)) {
             throw new BadDataException("album not found");
+        }
         return artistRepository.getArtistByAlbums(albumRepository.getAlbumByAlbumTitle(albumTitle))
                 .stream().map(artist->artist.getPersonInfo().getNickname())
                 .toList();
@@ -80,21 +82,23 @@ public class AlbumServiceImpl implements AlbumService {
 
     @Override
     public AlbumResDto getAlbumByTitle(String albumTitle) {
-        if(!albumRepository.existsAlbumByAlbumTitle(albumTitle))
+        if(!albumRepository.existsAlbumByAlbumTitle(albumTitle)) {
             throw new BadDataException("album not found");
+        }
         return albumDtoMapper.albumToAlbumRes(albumRepository.getAlbumByAlbumTitle(albumTitle));
     }
 
     @Override
     @Transactional
     public void deleteAlbum(String albumTitle) {
-        if(!albumRepository.existsAlbumByAlbumTitle(albumTitle))
+        if(!albumRepository.existsAlbumByAlbumTitle(albumTitle)) {
             throw new BadDataException("album not found");
-        List<Integer> songIds = songRepository.getSongsByAlbum_AlbumTitle(albumTitle).stream().map(song->song.getId()).toList();
+        }
+        /*List<Integer> songIds = songRepository.getSongsByAlbum_AlbumTitle(albumTitle).stream().map(song->song.getId()).toList();
         for(Integer id: songIds){
             commentRepository.deleteCommentsBySongId(id);
         }
-        songRepository.deleteSongsByAlbumAlbumTitle(albumTitle);
+        songRepository.deleteSongsByAlbumAlbumTitle(albumTitle);*/
         albumRepository.delete(albumRepository.getAlbumByAlbumTitle(albumTitle));
 
     }
@@ -102,8 +106,9 @@ public class AlbumServiceImpl implements AlbumService {
     @Override
     @Transactional
     public AlbumResDto createAlbum(AlbumReqDto albumReqDto) {
-        if(albumRepository.existsAlbumByAlbumTitle(albumReqDto.getAlbumTitle()))
+        if(albumRepository.existsAlbumByAlbumTitle(albumReqDto.getAlbumTitle())) {
             throw new BadDataException("album with such title is already exist");
+        }
         Album newAlbum = albumDtoMapper.albumReqToAlbum(albumReqDto);
         return albumDtoMapper.albumToAlbumRes(newAlbum);
     }

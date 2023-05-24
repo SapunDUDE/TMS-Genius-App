@@ -11,7 +11,7 @@
     <groupId>com.genius</groupId>
     <artifactId>tms_c61_genius</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>tms_c61_genius</name>
     <description>tms_c61_genius</description>
     <properties>

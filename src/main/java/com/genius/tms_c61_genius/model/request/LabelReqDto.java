@@ -15,6 +15,7 @@ public class LabelReqDto {
     @NotNull
     @Size(min = 5,max = 30)
     private String labelName;
+
     @NotNull
     @Size(max = 500)
     private String description;

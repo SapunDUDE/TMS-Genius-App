@@ -2,7 +2,6 @@ package com.genius.tms_c61_genius.service.ServiceImpl;
 
 import com.genius.tms_c61_genius.exception.NotFoundException;
 import com.genius.tms_c61_genius.mapper.CommentDtoMapper;
-import com.genius.tms_c61_genius.model.request.CommentReqDto;
 import com.genius.tms_c61_genius.model.response.CommentResDto;
 import com.genius.tms_c61_genius.repository.CommentRepository;
 import com.genius.tms_c61_genius.repository.SongRepository;

@@ -18,8 +18,9 @@ public class GenreServiceImpl implements GenreService {
 
     @Override
     public String createGenre(String genreName) {
-        if(genreRepository.existsGenreByGenreTitle(genreName))
+        if(genreRepository.existsGenreByGenreTitle(genreName)) {
             throw new BadDataException("genre with such title is already exist");
+        }
         return genreRepository.save(Genre.builder()
                 .genreTitle(genreName)
                 .build()).getGenreTitle();
@@ -27,10 +28,12 @@ public class GenreServiceImpl implements GenreService {
 
     @Override
     public String updateGenre(Integer genreId, String genreName) {
-        if(genreRepository.existsGenreByGenreTitle(genreName))
+        if(genreRepository.existsGenreByGenreTitle(genreName)) {
             throw new BadDataException("genre with such title is already exist");
-        if(!genreRepository.existsGenreById(genreId))
+        }
+        if(!genreRepository.existsGenreById(genreId)) {
             throw new NotFoundException("genre not found");
+        }
         Genre updatedGenre = genreRepository.getGenreById(genreId);
         updatedGenre.setGenreTitle(genreName);
         return genreRepository.save(updatedGenre).getGenreTitle();
@@ -38,15 +41,17 @@ public class GenreServiceImpl implements GenreService {
 
     @Override
     public void deleteGenre(Integer genreId) {
-        if(!genreRepository.existsGenreById(genreId))
+        if(!genreRepository.existsGenreById(genreId)) {
             throw new NotFoundException("genre not found");
+        }
         genreRepository.deleteById(genreId);
     }
 
     @Override
     public String getGenre(Integer genreId) {
-        if(!genreRepository.existsGenreById(genreId))
+        if(!genreRepository.existsGenreById(genreId)) {
             throw new NotFoundException("genre not found");
+        }
         return genreRepository.getGenreById(genreId).getGenreTitle();
     }
 }

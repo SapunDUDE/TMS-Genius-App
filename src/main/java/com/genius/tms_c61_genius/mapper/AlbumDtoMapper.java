@@ -5,14 +5,17 @@ import com.genius.tms_c61_genius.model.domain.Artist;
 import com.genius.tms_c61_genius.model.domain.Song;
 import com.genius.tms_c61_genius.model.domain.SoundProducer;
 import com.genius.tms_c61_genius.model.request.AlbumReqDto;
-import com.genius.tms_c61_genius.model.request.SongReqDto;
 import com.genius.tms_c61_genius.model.response.AlbumResDto;
-import com.genius.tms_c61_genius.repository.*;
+import com.genius.tms_c61_genius.repository.AlbumRepository;
+import com.genius.tms_c61_genius.repository.AlbumTypeRepository;
+import com.genius.tms_c61_genius.repository.ArtistRepository;
+import com.genius.tms_c61_genius.repository.GenreRepository;
+import com.genius.tms_c61_genius.repository.LabelRepository;
+import com.genius.tms_c61_genius.repository.SongRepository;
+import com.genius.tms_c61_genius.repository.SoundProducerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -54,9 +57,9 @@ public class AlbumDtoMapper {
                     }
                     return false;
                 })
-                .map(nick -> {
-                    return soundProducerRepository.getSoundProducerByPersonInfoNickname(nick).get();
-                })
+                .map(nick ->
+                    soundProducerRepository.getSoundProducerByPersonInfoNickname(nick).get()
+                )
                 .toList();
 
         List<Artist> artists = albumReqDto.getArtistNickNames()
@@ -67,9 +70,15 @@ public class AlbumDtoMapper {
                     }
                     return false;
                 })
-                .map(nick -> {
-                    return artistRepository.getArtistByPersonInfoNickname(nick).get();
-                })
+                .map(nick ->
+                    artistRepository.getArtistByPersonInfoNickname(nick).get()
+                )
+                .toList();
+
+        List<Song> songs = albumReqDto.getSongs()
+                .stream()
+                .map(newSong-> songDtoMapper.songReqToSong(newSong,artists)
+                )
                 .toList();
 
         Album newAlbum = Album.builder()
@@ -80,16 +89,10 @@ public class AlbumDtoMapper {
                 .label(labelRepository.getLabelByLabelName(albumReqDto.getLabel()))
                 .soundProducers(producers)
                 .artists(artists)
+                .songs(songRepository.saveAll(songs))
                 .build();
-        albumRepository.save(newAlbum);
 
-        List<Song> songs = albumReqDto.getSongs()
-                .stream()
-                .map(newSong-> songRepository.save(songDtoMapper.songReqToSong(newSong,artists,newAlbum))
-                )
-                .toList();
-
-        return newAlbum;
+        return albumRepository.save(newAlbum);
     }
     public AlbumResDto albumToAlbumRes(Album album){
         return AlbumResDto.builder()

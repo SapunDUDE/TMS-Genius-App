@@ -17,20 +17,25 @@ public class SoundProducerReqDto {
     @NotEmpty
     @Size(min = 2,max = 30)
     private String firstName;
+
     @NotNull
     @NotEmpty
     @Size(min = 2,max = 40)
     private String lastName;
+
     @NotNull
     @NotEmpty
     @Size(min = 2,max = 30)
     private String nickname;
+
     @NotEmpty
     @Size(max = 500)
     private String bio;
+
     @NotNull
     @NotEmpty
     private Date birthDate;
+
     @NotNull
     @NotEmpty
     @Size(min=5,max=30)

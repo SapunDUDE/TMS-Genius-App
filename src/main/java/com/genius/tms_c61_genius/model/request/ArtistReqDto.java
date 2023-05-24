@@ -18,10 +18,12 @@ public class ArtistReqDto {
     @NotNull
     @Size(min = 2, max = 30)
     private String firstName;
+
     @NotEmpty
     @NotNull
     @Size(min = 2, max = 40)
     private String lastName;
+
     @NotEmpty
     @NotNull
     @Size(min = 7, max = 30)
@@ -30,9 +32,11 @@ public class ArtistReqDto {
     @NotNull
     @Size(max =500)
     private String bio;
+
     @NotEmpty
     @NotNull
     private Date birthDate;
+
     @NotEmpty
     @NotNull
     private String country;

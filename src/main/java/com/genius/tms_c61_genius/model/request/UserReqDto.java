@@ -15,6 +15,7 @@ public class UserReqDto {
     @NotNull
     @Size(min = 5, max = 30)
     private String nickname;
+
     @NotEmpty
     @NotNull
     @Size(min = 5, max = 32)
@@ -25,6 +26,7 @@ public class UserReqDto {
     @Size(min = 5, max = 32)
     @Pattern(regexp = "[a-zA-Z0-9]{6,}")
     private String password;
+
     @NotEmpty
     @NotNull
     @Size(min = 2, max = 32)

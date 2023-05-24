@@ -38,30 +38,34 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserResDto createUser(UserReqDto userReq) {
-        if(userRepository.existsUserByLogin(userReq.getLogin()))
+        if(userRepository.existsUserByLogin(userReq.getLogin())) {
             throw new BadDataException("user with such login is already exist");
+        }
         User savedUser = userRepository.save(userDtoMapper.userReqToUser(userReq));
         return userDtoMapper.userToUserRes(savedUser);
     }
 
     @Override
     public void deleteUser(String login) {
-        if(!userRepository.existsUserByLogin(login))
+        if(!userRepository.existsUserByLogin(login)) {
             throw new NotFoundException("user not found");
+        }
         userRepository.delete(userRepository.getUserByLogin(login).get());
     }
 
     @Override
     public UserResDto getUser(String login) {
-        if(!userRepository.existsUserByLogin(login))
+        if(!userRepository.existsUserByLogin(login)) {
             throw new NotFoundException("user not found");
+        }
         return userDtoMapper.userToUserRes(userRepository.getUserByLogin(login).get());
     }
 
     @Override
     public List<CommentResDto> getComments(Integer id) {
-        if(!userRepository.existsUserById(id))
+        if(!userRepository.existsUserById(id)) {
             throw new NotFoundException("user not found");
+        }
         return commentRepository.getCommentsByUserId(id)
                 .stream()
                 .map(comment -> commentDtoMapper.commentToCommentRes(comment))
