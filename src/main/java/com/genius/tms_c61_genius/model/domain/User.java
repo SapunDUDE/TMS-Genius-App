@@ -47,7 +47,7 @@ public class User {
     @JoinColumn(name = "role_id", referencedColumnName = "id")
     private Role role;
 
-    @OneToOne(mappedBy = "user")
+    @OneToOne(cascade = CascadeType.ALL,mappedBy = "user")
     private Artist artist;
 
     @OneToMany(mappedBy = "user")

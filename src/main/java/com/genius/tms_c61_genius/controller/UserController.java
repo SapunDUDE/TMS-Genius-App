@@ -4,7 +4,6 @@ import com.genius.tms_c61_genius.aspect.TrackExecutionTime;
 import com.genius.tms_c61_genius.model.request.UserReqDto;
 import com.genius.tms_c61_genius.model.response.CommentResDto;
 import com.genius.tms_c61_genius.model.response.UserResDto;
-import com.genius.tms_c61_genius.service.CommentService;
 import com.genius.tms_c61_genius.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +30,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping()
+    @PostMapping("/registration")
     @TrackExecutionTime
     public ResponseEntity<UserResDto> createUser(@Valid @RequestBody UserReqDto user) {
         return new ResponseEntity<>(userService.createUser(user), HttpStatus.CREATED);

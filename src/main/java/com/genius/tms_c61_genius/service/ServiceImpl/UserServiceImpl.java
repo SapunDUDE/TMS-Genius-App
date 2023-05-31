@@ -12,28 +12,32 @@ import com.genius.tms_c61_genius.repository.CommentRepository;
 import com.genius.tms_c61_genius.repository.UserRepository;
 import com.genius.tms_c61_genius.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
-    //TODO add password encoder and custom exceptions
-    //private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
     private final UserDtoMapper userDtoMapper;
     private final CommentRepository commentRepository;
     private final CommentDtoMapper commentDtoMapper;
 
+    private final PasswordEncoder passwordEncoder;
+
     @Autowired
     public UserServiceImpl(UserRepository userRepository,
                            UserDtoMapper userDtoMapper,
                            CommentRepository commentRepository,
-                           CommentDtoMapper commentDtoMapper) {
+                           CommentDtoMapper commentDtoMapper,
+                           PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.userDtoMapper = userDtoMapper;
         this.commentRepository = commentRepository;
         this.commentDtoMapper =commentDtoMapper;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -41,11 +45,13 @@ public class UserServiceImpl implements UserService {
         if(userRepository.existsUserByLogin(userReq.getLogin())) {
             throw new BadDataException("user with such login is already exist");
         }
+        userReq.setPassword(passwordEncoder.encode(userReq.getPassword()));
         User savedUser = userRepository.save(userDtoMapper.userReqToUser(userReq));
         return userDtoMapper.userToUserRes(savedUser);
     }
 
     @Override
+    @Transactional
     public void deleteUser(String login) {
         if(!userRepository.existsUserByLogin(login)) {
             throw new NotFoundException("user not found");
