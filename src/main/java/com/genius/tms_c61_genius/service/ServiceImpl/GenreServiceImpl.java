@@ -34,7 +34,7 @@ public class GenreServiceImpl implements GenreService {
         if(!genreRepository.existsGenreById(genreId)) {
             throw new NotFoundException("genre not found");
         }
-        Genre updatedGenre = genreRepository.getGenreById(genreId);
+        Genre updatedGenre = genreRepository.getGenreById(genreId).get();
         updatedGenre.setGenreTitle(genreName);
         return genreRepository.save(updatedGenre).getGenreTitle();
     }
@@ -52,6 +52,6 @@ public class GenreServiceImpl implements GenreService {
         if(!genreRepository.existsGenreById(genreId)) {
             throw new NotFoundException("genre not found");
         }
-        return genreRepository.getGenreById(genreId).getGenreTitle();
+        return genreRepository.getGenreById(genreId).get().getGenreTitle();
     }
 }

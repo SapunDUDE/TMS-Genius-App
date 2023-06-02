@@ -12,7 +12,6 @@ public interface CommentRepository extends JpaRepository<Comment,Integer> {
     Optional<Comment> getCommentById(Integer id);
     List<Comment> getCommentsByUserId(Integer id);
     List<Comment> getCommentsBySongId(Integer id);
-    void deleteCommentsBySongId(Integer id);
     Boolean existsCommentById(Integer id);
 
 }

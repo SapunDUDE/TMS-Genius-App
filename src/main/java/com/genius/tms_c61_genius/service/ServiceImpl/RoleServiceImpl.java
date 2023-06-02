@@ -31,7 +31,7 @@ public class RoleServiceImpl implements RoleService {
         if(!roleRepository.existsRoleById(roleId)) {
             throw new NotFoundException("role not found");
         }
-        Role updatedRole = roleRepository.getRoleById(roleId);
+        Role updatedRole = roleRepository.getRoleById(roleId).get();
         updatedRole.setRoleName(roleName);
         return roleRepository.save(updatedRole).getRoleName();
     }
@@ -49,6 +49,6 @@ public class RoleServiceImpl implements RoleService {
         if(!roleRepository.existsRoleById(roleId)) {
             throw new NotFoundException("role not found");
         }
-        return roleRepository.getRoleById(roleId).getRoleName();
+        return roleRepository.getRoleById(roleId).get().getRoleName();
     }
 }

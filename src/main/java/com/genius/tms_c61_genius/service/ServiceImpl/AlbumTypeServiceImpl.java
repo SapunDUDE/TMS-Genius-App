@@ -34,7 +34,7 @@ public class AlbumTypeServiceImpl implements AlbumTypeService {
         if(albumTypeRepository.existsAlbumTypeByTypeName(albumTypeName)) {
             throw new BadDataException("album with such name is already exist");
         }
-        AlbumType updatedAlbumType = albumTypeRepository.getAlbumTypeById(albumTypeId);
+        AlbumType updatedAlbumType = albumTypeRepository.getAlbumTypeById(albumTypeId).get();
         updatedAlbumType.setTypeName(albumTypeName);
         return albumTypeRepository.save(updatedAlbumType).getTypeName();
     }
@@ -52,6 +52,6 @@ public class AlbumTypeServiceImpl implements AlbumTypeService {
         if(!albumTypeRepository.existsAlbumTypeById(albumTypeId)) {
             throw new NotFoundException("album type not found");
         }
-        return albumTypeRepository.getAlbumTypeById(albumTypeId).getTypeName();
+        return albumTypeRepository.getAlbumTypeById(albumTypeId).get().getTypeName();
     }
 }

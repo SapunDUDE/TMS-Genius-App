@@ -55,7 +55,7 @@ public class ArtistServiceImpl implements ArtistService {
         if(!artistRepository.existsArtistByUserLogin(userLogin)) {
             throw new NotFoundException("artist not found");
         }
-        return artistDtoMapper.artistToArtistRes(artistRepository.getArtistByUser_Login(userLogin));
+        return artistDtoMapper.artistToArtistRes(artistRepository.getArtistByUser_Login(userLogin).get());
     }
 
     @Override

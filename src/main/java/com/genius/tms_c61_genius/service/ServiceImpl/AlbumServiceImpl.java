@@ -60,7 +60,7 @@ public class AlbumServiceImpl implements AlbumService {
             throw new BadDataException("album not found");
         }
         return soundProducerRepository.getSoundProducersByAlbums(
-                albumRepository.getAlbumByAlbumTitle(albumTitle))
+                albumRepository.getAlbumByAlbumTitle(albumTitle).get())
                 .stream().map(producer->producer.getPersonInfo().getNickname())
                 .toList();
     }
@@ -70,7 +70,7 @@ public class AlbumServiceImpl implements AlbumService {
         if(!albumRepository.existsAlbumByAlbumTitle(albumTitle)) {
             throw new BadDataException("album not found");
         }
-        return artistRepository.getArtistByAlbums(albumRepository.getAlbumByAlbumTitle(albumTitle))
+        return artistRepository.getArtistByAlbums(albumRepository.getAlbumByAlbumTitle(albumTitle).get())
                 .stream().map(artist->artist.getPersonInfo().getNickname())
                 .toList();
     }
@@ -80,7 +80,7 @@ public class AlbumServiceImpl implements AlbumService {
         if(!albumRepository.existsAlbumByAlbumTitle(albumTitle)) {
             throw new BadDataException("album not found");
         }
-        return albumDtoMapper.albumToAlbumRes(albumRepository.getAlbumByAlbumTitle(albumTitle));
+        return albumDtoMapper.albumToAlbumRes(albumRepository.getAlbumByAlbumTitle(albumTitle).get());
     }
 
     @Override
@@ -89,7 +89,7 @@ public class AlbumServiceImpl implements AlbumService {
         if(!albumRepository.existsAlbumByAlbumTitle(albumTitle)) {
             throw new BadDataException("album not found");
         }
-        albumRepository.delete(albumRepository.getAlbumByAlbumTitle(albumTitle));
+        albumRepository.delete(albumRepository.getAlbumByAlbumTitle(albumTitle).get());
     }
 
     @Override

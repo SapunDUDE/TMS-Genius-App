@@ -35,7 +35,7 @@ public class LabelServiceImpl implements LabelService {
         if(!labelRepository.existsLabelByLabelName(labelName)) {
             throw new NotFoundException("label not found");
         }
-        return labelDtoMapper.labelToLabelRes(labelRepository.getLabelByLabelName(labelName));
+        return labelDtoMapper.labelToLabelRes(labelRepository.getLabelByLabelName(labelName).get());
     }
 
     @Override
@@ -43,7 +43,7 @@ public class LabelServiceImpl implements LabelService {
         if(!labelRepository.existsLabelByLabelName(labelReqDto.getLabelName())) {
             throw new NotFoundException("label not found");
         }
-        Label updatedLabel = labelRepository.getLabelByLabelName(labelReqDto.getLabelName());
+        Label updatedLabel = labelRepository.getLabelByLabelName(labelReqDto.getLabelName()).get();
         updatedLabel.setDescription(labelReqDto.getDescription());
         return labelDtoMapper.labelToLabelRes(updatedLabel);
     }
@@ -53,6 +53,6 @@ public class LabelServiceImpl implements LabelService {
         if(!labelRepository.existsLabelByLabelName(labelName)) {
             throw new NotFoundException("label not found");
         }
-        labelRepository.delete(labelRepository.getLabelByLabelName(labelName));
+        labelRepository.delete(labelRepository.getLabelByLabelName(labelName).get());
     }
 }
