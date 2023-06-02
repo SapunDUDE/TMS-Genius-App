@@ -77,4 +77,12 @@ public class UserServiceImpl implements UserService {
                 .map(comment -> commentDtoMapper.commentToCommentRes(comment))
                 .toList();
     }
+
+    @Override
+    public String getUserNameById(Integer id) {
+        if(!userRepository.existsUserById(id)) {
+            throw new NotFoundException("user not found");
+        }
+        return userRepository.getUserById(id).get().getLogin();
+    }
 }

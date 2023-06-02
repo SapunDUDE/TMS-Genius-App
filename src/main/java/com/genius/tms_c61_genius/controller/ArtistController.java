@@ -9,6 +9,7 @@ import com.genius.tms_c61_genius.service.ArtistService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -45,16 +46,26 @@ public class ArtistController {
 
     @DeleteMapping()
     @TrackExecutionTime
-    public ResponseEntity<HttpStatus> deleteArtistByUserLogin(@RequestParam String userlogin) {
-        artistService.deleteArtistByUser(userlogin);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    public ResponseEntity<HttpStatus> deleteArtistByUserLogin(@RequestParam String userlogin, Authentication auth) {
+        if(auth.getName().equals(userlogin)
+                || auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))
+        ){
+            artistService.deleteArtistByUser(userlogin);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(HttpStatus.CONFLICT);
     }
 
     @DeleteMapping("/{nickname}")
     @TrackExecutionTime
-    public ResponseEntity<HttpStatus> deleteArtistByNickName(@PathVariable String nickname) {
-        artistService.deleteArtistByNickName(nickname);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    public ResponseEntity<HttpStatus> deleteArtistByNickName(@PathVariable String nickname, Authentication auth) {
+        if(auth.getName().equals(artistService.getUserLogin(nickname))
+                || auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))
+        ){
+            artistService.deleteArtistByNickName(nickname);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(HttpStatus.CONFLICT);
     }
 
     @GetMapping("/{nickname}")

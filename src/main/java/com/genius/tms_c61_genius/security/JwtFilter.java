@@ -20,6 +20,7 @@ import java.io.IOException;
 public class JwtFilter extends OncePerRequestFilter {
     private final JwtService jwtService;
     private final UserRepository userRepository;
+
     @Autowired
     public JwtFilter(JwtService jwtService, UserRepository userRepository) {
         this.jwtService = jwtService;

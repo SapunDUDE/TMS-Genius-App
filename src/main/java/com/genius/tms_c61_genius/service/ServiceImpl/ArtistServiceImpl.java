@@ -11,9 +11,7 @@ import com.genius.tms_c61_genius.model.response.ArtistResDto;
 import com.genius.tms_c61_genius.model.response.SongResDto;
 import com.genius.tms_c61_genius.repository.AlbumRepository;
 import com.genius.tms_c61_genius.repository.ArtistRepository;
-import com.genius.tms_c61_genius.repository.PersonInfoRepository;
 import com.genius.tms_c61_genius.repository.SongRepository;
-import com.genius.tms_c61_genius.repository.UserRepository;
 import com.genius.tms_c61_genius.service.ArtistService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -66,6 +64,17 @@ public class ArtistServiceImpl implements ArtistService {
             throw new NotFoundException("artist not found");
         }
         return artistDtoMapper.artistToArtistRes(artistRepository.getArtistByPersonInfoNickname(nickName).get());
+    }
+
+    @Override
+    public String getUserLogin(String nickName) {
+        if(!artistRepository.existsArtistByPersonInfoNickname(nickName)) {
+            throw new NotFoundException("artist not found");
+        }
+        if(artistRepository.getArtistByPersonInfoNickname(nickName).get().getUser()==null){
+            throw new NotFoundException("artist with such user not found");
+        }
+        return artistRepository.getArtistByPersonInfoNickname(nickName).get().getUser().getLogin();
     }
 
     @Override

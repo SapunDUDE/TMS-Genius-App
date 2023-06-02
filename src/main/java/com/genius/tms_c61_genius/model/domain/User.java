@@ -43,7 +43,7 @@ public class User {
     @Column(name = "nickname")
     private String nickName;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH,CascadeType.MERGE,CascadeType.DETACH,CascadeType.PERSIST})
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.REFRESH,CascadeType.MERGE,CascadeType.DETACH,CascadeType.PERSIST})
     @JoinColumn(name = "role_id", referencedColumnName = "id")
     private Role role;
 

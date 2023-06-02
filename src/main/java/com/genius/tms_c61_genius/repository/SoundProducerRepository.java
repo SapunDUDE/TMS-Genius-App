@@ -12,12 +12,9 @@ import java.util.Optional;
 public interface SoundProducerRepository extends JpaRepository<SoundProducer,Integer>  {
     Optional<SoundProducer> getSoundProducerById(Integer id);
     Optional<SoundProducer>getSoundProducerByPersonInfoNickname(String nickName);
-
     List<SoundProducer> getSoundProducersByAlbums(Album album);
-
     void deleteSoundProducerById(Integer id);
     void deleteSoundProducerByPersonInfoNickname(String nickname);
-
     Boolean existsSoundProducerByPersonInfoNickname(String nickName);
     Boolean existsSoundProducerById(Integer id);
 }

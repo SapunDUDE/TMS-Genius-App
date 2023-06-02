@@ -8,6 +8,7 @@ import com.genius.tms_c61_genius.service.AlbumService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,15 +32,23 @@ public class AlbumController {
 
     @PostMapping("/create")
     @TrackExecutionTime
-    ResponseEntity<AlbumResDto> createAlbum(@RequestBody AlbumReqDto albumReqDto) {
-        return new ResponseEntity<>(albumService.createAlbum(albumReqDto), HttpStatus.CREATED);
+    ResponseEntity<AlbumResDto> createAlbum(@RequestBody AlbumReqDto albumReqDto, Authentication auth) {
+        if(albumService.getUsers(albumReqDto.getArtistNickNames()).stream().anyMatch(u->u.equals(auth.getName()))
+        || auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))){
+            return new ResponseEntity<>(albumService.createAlbum(albumReqDto), HttpStatus.CREATED);
+        }
+        return new ResponseEntity<>(HttpStatus.CONFLICT);
     }
 
     @DeleteMapping("/delete")
     @TrackExecutionTime
-    ResponseEntity<HttpStatus> deleteAlbum(@RequestParam String title) {
-        albumService.deleteAlbum(title);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    ResponseEntity<HttpStatus> deleteAlbum(@RequestParam String title, Authentication auth) {
+        if(albumService.getUsers(albumService.getArtists(title)).stream().anyMatch(u->u.equals(auth.getName()))
+            || auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))){
+            albumService.deleteAlbum(title);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(HttpStatus.CONFLICT);
     }
 
     @GetMapping("/{title}")

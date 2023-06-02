@@ -9,6 +9,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,9 +39,14 @@ public class UserController {
 
     @DeleteMapping("/{login}")
     @TrackExecutionTime
-    public ResponseEntity<HttpStatus> deleteUser(@PathVariable String login) {
-        userService.deleteUser(login);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    public ResponseEntity<HttpStatus> deleteUser(@PathVariable String login, Authentication auth) {
+        if(auth.getName().equals(login)
+                || auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))
+        ){
+            userService.deleteUser(login);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(HttpStatus.CONFLICT);
     }
 
     @GetMapping("/{login}")
@@ -50,7 +56,12 @@ public class UserController {
     }
 
     @GetMapping("/comments")
-    public ResponseEntity<List<CommentResDto>> getUserComments(@RequestParam Integer id) {
-        return new ResponseEntity<>(userService.getComments(id), HttpStatus.OK);
+    public ResponseEntity<List<CommentResDto>> getUserComments(@RequestParam Integer id, Authentication auth) {
+        if(auth.getName().equals(userService.getUserNameById(id))
+                || auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))
+        ){
+            return new ResponseEntity<>(userService.getComments(id), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.CONFLICT);
     }
 }

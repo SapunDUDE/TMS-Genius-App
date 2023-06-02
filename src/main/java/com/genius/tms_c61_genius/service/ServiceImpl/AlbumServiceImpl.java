@@ -9,7 +9,6 @@ import com.genius.tms_c61_genius.model.response.SongResDto;
 import com.genius.tms_c61_genius.model.domain.Album;
 import com.genius.tms_c61_genius.repository.AlbumRepository;
 import com.genius.tms_c61_genius.repository.ArtistRepository;
-import com.genius.tms_c61_genius.repository.CommentRepository;
 import com.genius.tms_c61_genius.repository.SongRepository;
 import com.genius.tms_c61_genius.repository.SoundProducerRepository;
 import com.genius.tms_c61_genius.service.AlbumService;
@@ -27,8 +26,6 @@ public class AlbumServiceImpl implements AlbumService {
     private final SoundProducerRepository soundProducerRepository;
     private final SongDtoMapper songDtoMapper;
     private final ArtistRepository artistRepository;
-    private final CommentRepository commentRepository;
-
 
     @Autowired
     public AlbumServiceImpl(AlbumDtoMapper albumDtoMapper,
@@ -36,15 +33,13 @@ public class AlbumServiceImpl implements AlbumService {
                             SongRepository songRepository,
                             SoundProducerRepository soundProducerRepository,
                             SongDtoMapper songDtoMapper,
-                            ArtistRepository artistRepository,
-                            CommentRepository commentRepository) {
+                            ArtistRepository artistRepository) {
         this.albumDtoMapper = albumDtoMapper;
         this.albumRepository = albumRepository;
         this.songRepository = songRepository;
         this.soundProducerRepository = soundProducerRepository;
         this.songDtoMapper = songDtoMapper;
         this.artistRepository = artistRepository;
-        this.commentRepository = commentRepository;
     }
 
     @Override
@@ -94,13 +89,7 @@ public class AlbumServiceImpl implements AlbumService {
         if(!albumRepository.existsAlbumByAlbumTitle(albumTitle)) {
             throw new BadDataException("album not found");
         }
-        /*List<Integer> songIds = songRepository.getSongsByAlbum_AlbumTitle(albumTitle).stream().map(song->song.getId()).toList();
-        for(Integer id: songIds){
-            commentRepository.deleteCommentsBySongId(id);
-        }
-        songRepository.deleteSongsByAlbumAlbumTitle(albumTitle);*/
         albumRepository.delete(albumRepository.getAlbumByAlbumTitle(albumTitle));
-
     }
 
     @Override
@@ -111,5 +100,14 @@ public class AlbumServiceImpl implements AlbumService {
         }
         Album newAlbum = albumDtoMapper.albumReqToAlbum(albumReqDto);
         return albumDtoMapper.albumToAlbumRes(newAlbum);
+    }
+
+    @Override
+    public List<String> getUsers(List<String> artistNickNames) {
+        return artistNickNames.stream().filter(nick->artistRepository.getArtistByPersonInfoNickname(nick).isPresent()?true:false)
+                .map(nick->artistRepository.getArtistByPersonInfoNickname(nick).get())
+                .filter(artist->artist.getUser()!=null?true:false)
+                .map(artist -> artist.getUser().getLogin())
+                .toList();
     }
 }

@@ -8,11 +8,10 @@ import java.util.List;
 
 public interface AlbumService {
     AlbumResDto createAlbum(AlbumReqDto albumReqDto);
-
     void  deleteAlbum(String albumTitle);
-
     AlbumResDto getAlbumByTitle(String albumTitle);
     List<SongResDto> getSongs(String albumTitle);
     List<String> getProducers(String albumTitle);
     List<String> getArtists(String albumTitle);
+    List<String> getUsers(List<String>artistNickNames);
 }

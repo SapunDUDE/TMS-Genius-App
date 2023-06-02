@@ -13,6 +13,8 @@ public interface UserService {
 
     UserResDto getUser(String login);
 
+    String getUserNameById(Integer id);
+
     List<CommentResDto> getComments(Integer id);
 
 }
